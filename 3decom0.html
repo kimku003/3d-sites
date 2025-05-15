@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusShop - Galerie 3D Futuriste</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            overflow: hidden;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        #ui {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        #hud {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #cart-icon {
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300ffff"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>');
+            background-repeat: no-repeat;
+        }
+        
+        #cart-count {
+            color: #00ffff;
+            font-weight: bold;
+        }
+        
+        #cart-total {
+            color: #fff;
+        }
+        
+        #instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+            color: #00ffff;
+        }
+        
+        #product-info {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            padding: 15px;
+            max-width: 400px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: all;
+        }
+        
+        #product-info.visible {
+            opacity: 1;
+        }
+        
+        #product-info h2 {
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+        
+        #product-info p {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        #product-info img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            background-color: #222;
+        }
+        
+        #add-to-cart {
+            background: linear-gradient(to right, #0066ff, #00ccff);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            pointer-events: all;
+        }
+        
+        #add-to-cart:hover {
+            background: linear-gradient(to right, #0055dd, #00bbee);
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #0066ff, #00ccff);
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <h2>CHARGEMENT DE LA GALERIE NEXUS</h2>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loading-progress"></div>
+        </div>
+    </div>
+
+    <div id="canvas-container"></div>
+    
+    <div id="ui">
+        <div id="hud">
+            <div id="cart-icon"></div>
+            <span id="cart-count">0</span>
+            <span id="cart-total">- 0.00 €</span>
+        </div>
+        
+        <div id="instructions">
+            Utilisez les touches WASD pour vous déplacer, la souris pour regarder autour
+        </div>
+        
+        <div id="product-info">
+            <img id="product-image" src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23222'/%3E%3Ctext x='50%' y='50%' font-family='Arial' font-size='24' fill='%23fff' text-anchor='middle' dominant-baseline='middle'%3EImage du produit%3C/text%3E%3C/svg%3E" alt="Produit">
+            <h2 id="product-title">Nom du produit</h2>
+            <p id="product-description">Description du produit apparaîtra ici.</p>
+            <button id="add-to-cart">Ajouter au panier - <span id="product-price">0.00</span> €</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let camera, scene, renderer, controls;
+        let products = [];
+        let currentProduct = null;
+        let cart = [];
+        let isMoving = false;
+        let loadingInterval;
+        
+        // Données des produits
+        const productData = [
+            {
+                id: 1,
+                title: "NexusPhone X",
+                description: "Le smartphone du futur avec hologrammes intégrés et interface neuronale.",
+                price: 999.99,
+                color: 0x3498db,
+                position: { x: -5, y: 0, z: -10 }
+            },
+            {
+                id: 2,
+                title: "Quantum Watch",
+                description: "Montrice quantique avec affichage temporel multidimensionnel.",
+                price: 599.99,
+                color: 0xe74c3c,
+                position: { x: 0, y: 0, z: -15 }
+            },
+            {
+                id: 3,
+                title: "Neural Headset",
+                description: "Casque de réalité virtuelle avec connexion directe au cortex cérébral.",
+                price: 1299.99,
+                color: 0x2ecc71,
+                position: { x: 5, y: 0, z: -10 }
+            },
+            {
+                id: 4,
+                title: "Gravity Boots",
+                description: "Chaussures antigravité pour une marche en apesanteur contrôlée.",
+                price: 799.99,
+                color: 0xf1c40f,
+                position: { x: -5, y: 0, z: 0 }
+            },
+            {
+                id: 5,
+                title: "Holo Projector",
+                description: "Projecteur holographique portable avec résolution 16K.",
+                price: 1499.99,
+                color: 0x9b59b6,
+                position: { x: 0, y: 0, z: 5 }
+            },
+            {
+                id: 6,
+                title: "Bio-Computer",
+                description: "Ordinateur organique avec processeurs neuronaux vivants.",
+                price: 2499.99,
+                color: 0x1abc9c,
+                position: { x: 5, y: 0, z: 0 }
+            }
+        ];
+        
+        // Simulation de chargement
+        function simulateLoading() {
+            let progress = 0;
+            loadingInterval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                document.getElementById('loading-progress').style.width = `${progress}%`;
+                
+                if (progress === 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        document.querySelector('.loading-screen').style.display = 'none';
+                        init();
+                        animate();
+                    }, 500);
+                }
+            }, 100);
+        }
+        
+        // Initialisation de la scène Three.js
+        function init() {
+            // Création de la scène
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+            scene.fog = new THREE.FogExp2(0x000000, 0.02);
+            
+            // Création de la caméra
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 1.6, 10);
+            
+            // Création du renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Ajout des lumières
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0x00ffff, 0.8);
+            directionalLight.position.set(0, 10, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 1024;
+            directionalLight.shadow.mapSize.height = 1024;
+            scene.add(directionalLight);
+            
+            const spotLight = new THREE.SpotLight(0xffffff, 0.5);
+            spotLight.position.set(0, 15, 0);
+            spotLight.angle = Math.PI / 4;
+            spotLight.penumbra = 0.5;
+            spotLight.decay = 2;
+            spotLight.distance = 50;
+            spotLight.castShadow = true;
+            scene.add(spotLight);
+            
+            // Création du sol
+            const floorGeometry = new THREE.PlaneGeometry(100, 100);
+            const floorMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x111111,
+                roughness: 0.1,
+                metalness: 0.5
+            });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            scene.add(floor);
+            
+            // Ajout d'un effet de réflexion au sol
+            const floorMirror = new THREE.Mesh(
+                floorGeometry,
+                new THREE.MeshStandardMaterial({
+                    color: 0x222222,
+                    roughness: 0,
+                    metalness: 1,
+                    transparent: true,
+                    opacity: 0.2
+                })
+            );
+            floorMirror.rotation.x = -Math.PI / 2;
+            floorMirror.position.y = 0.01;
+            scene.add(floorMirror);
+            
+            // Création des murs de la galerie
+            createWalls();
+            
+            // Création des produits
+            createProducts();
+            
+            // Gestion des événements
+            window.addEventListener('resize', onWindowResize);
+            document.addEventListener('keydown', onKeyDown);
+            document.addEventListener('keyup', onKeyUp);
+            document.getElementById('add-to-cart').addEventListener('click', addToCart);
+            
+            // Configuration des contrôles de mouvement
+            setupMovementControls();
+            
+            // Détection de collision avec les produits
+            setupProductDetection();
+        }
+        
+        // Création des murs de la galerie
+        function createWalls() {
+            const wallMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x222222,
+                roughness: 0.7,
+                metalness: 0.3
+            });
+            
+            // Mur arrière
+            const backWall = new THREE.Mesh(
+                new THREE.PlaneGeometry(30, 10),
+                wallMaterial
+            );
+            backWall.position.set(0, 5, -15);
+            backWall.rotation.y = Math.PI;
+            scene.add(backWall);
+            
+            // Mur gauche
+            const leftWall = new THREE.Mesh(
+                new THREE.PlaneGeometry(30, 10),
+                wallMaterial
+            );
+            leftWall.position.set(-15, 5, 0);
+            leftWall.rotation.y = Math.PI / 2;
+            scene.add(leftWall);
+            
+            // Mur droit
+            const rightWall = new THREE.Mesh(
+                new THREE.PlaneGeometry(30, 10),
+                wallMaterial
+            );
+            rightWall.position.set(15, 5, 0);
+            rightWall.rotation.y = -Math.PI / 2;
+            scene.add(rightWall);
+            
+            // Plafond
+            const ceiling = new THREE.Mesh(
+                new THREE.PlaneGeometry(30, 30),
+                wallMaterial
+            );
+            ceiling.position.set(0, 10, 0);
+            ceiling.rotation.x = Math.PI / 2;
+            scene.add(ceiling);
+        }
+        
+        // Création des produits dans la scène
+        function createProducts() {
+            productData.forEach(product => {
+                // Socle du produit
+                const pedestalGeometry = new THREE.CylinderGeometry(1, 1, 0.2, 32);
+                const pedestalMaterial = new THREE.MeshStandardMaterial({ 
+                    color: 0x333333,
+                    roughness: 0.2,
+                    metalness: 0.8
+                });
+                const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
+                pedestal.position.set(product.position.x, 0.1, product.position.z);
+                pedestal.receiveShadow = true;
+                scene.add(pedestal);
+                
+                // Objet du produit (sphère pour l'exemple)
+                const productGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+                const productMaterial = new THREE.MeshStandardMaterial({ 
+                    color: product.color,
+                    roughness: 0.1,
+                    metalness: 0.9,
+                    emissive: product.color,
+                    emissiveIntensity: 0.2
+                });
+                const productMesh = new THREE.Mesh(productGeometry, productMaterial);
+                productMesh.position.set(product.position.x, 1, product.position.z);
+                productMesh.castShadow = true;
+                productMesh.userData = { ...product, pedestal: pedestal };
+                scene.add(productMesh);
+                
+                // Ajout d'un halo de lumière autour du produit
+                const pointLight = new THREE.PointLight(product.color, 0.5, 5);
+                pointLight.position.set(product.position.x, 1, product.position.z);
+                scene.add(pointLight);
+                
+                products.push(productMesh);
+            });
+        }
+        
+        // Configuration des contrôles de mouvement
+        function setupMovementControls() {
+            const moveState = {
+                forward: false,
+                backward: false,
+                left: false,
+                right: false
+            };
+            
+            const velocity = new THREE.Vector3();
+            const direction = new THREE.Vector3();
+            
+            function updateMovement() {
+                if (isMoving) return;
+                
+                velocity.x -= velocity.x * 0.08;
+                velocity.z -= velocity.z * 0.08;
+                
+                direction.z = Number(moveState.forward) - Number(moveState.backward);
+                direction.x = Number(moveState.right) - Number(moveState.left);
+                direction.normalize();
+                
+                if (moveState.forward || moveState.backward) velocity.z -= direction.z * 0.1;
+                if (moveState.left || moveState.right) velocity.x -= direction.x * 0.1;
+                
+                // Empêcher le joueur de sortir de la galerie
+                const newPosition = camera.position.clone();
+                newPosition.x += velocity.x;
+                newPosition.z += velocity.z;
+                
+                const boundary = 13;
+                if (Math.abs(newPosition.x) > boundary) velocity.x = 0;
+                if (newPosition.z > 5 || newPosition.z < -boundary) velocity.z = 0;
+                
+                camera.translateX(velocity.x);
+                camera.translateZ(velocity.z);
+            }
+            
+            function onKeyDown(event) {
+                switch (event.key.toLowerCase()) {
+                    case 'w': moveState.forward = true; break;
+                    case 's': moveState.backward = true; break;
+                    case 'a': moveState.left = true; break;
+                    case 'd': moveState.right = true; break;
+                }
+            }
+            
+            function onKeyUp(event) {
+                switch (event.key.toLowerCase()) {
+                    case 'w': moveState.forward = false; break;
+                    case 's': moveState.backward = false; break;
+                    case 'a': moveState.left = false; break;
+                    case 'd': moveState.right = false; break;
+                }
+            }
+            
+            // Gestion de la souris pour regarder autour
+            let isMouseDown = false;
+            let previousMouseX = 0;
+            let previousMouseY = 0;
+            
+            document.addEventListener('mousedown', (event) => {
+                isMouseDown = true;
+                previousMouseX = event.clientX;
+                previousMouseY = event.clientY;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isMouseDown = false;
+            });
+            
+            document.addEventListener('mousemove', (event) => {
+                if (!isMouseDown) return;
+                
+                const deltaX = event.clientX - previousMouseX;
+                const deltaY = event.clientY - previousMouseY;
+                
+                camera.rotation.y -= deltaX * 0.002;
+                camera.rotation.x -= deltaY * 0.002;
+                camera.rotation.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, camera.rotation.x));
+                
+                previousMouseX = event.clientX;
+                previousMouseY = event.clientY;
+            });
+            
+            // Ajout des gestionnaires d'événements
+            window.addEventListener('keydown', onKeyDown);
+            window.addEventListener('keyup', onKeyUp);
+            
+            // Mise à jour du mouvement dans la boucle d'animation
+            function animateMovement() {
+                updateMovement();
+                requestAnimationFrame(animateMovement);
+            }
+            
+            animateMovement();
+        }
+        
+        // Détection de proximité avec les produits
+        function setupProductDetection() {
+            const raycaster = new THREE.Raycaster();
+            const direction = new THREE.Vector3();
+            
+            function checkProductProximity() {
+                if (isMoving) return;
+                
+                // Réinitialiser l'info produit si on est trop loin
+                if (currentProduct) {
+                    const distance = camera.position.distanceTo(currentProduct.position);
+                    if (distance > 4) {
+                        hideProductInfo();
+                    }
+                }
+                
+                // Vérifier la proximité avec tous les produits
+                products.forEach(product => {
+                    const distance = camera.position.distanceTo(product.position);
+                    
+                    if (distance < 4) {
+                        // Vérifier si le produit est dans le champ de vision
+                        direction.subVectors(product.position, camera.position).normalize();
+                        const angle = camera.getWorldDirection(new THREE.Vector3()).angleTo(direction);
+                        
+                        if (angle < Math.PI / 4) { // 45 degrés de vision
+                            showProductInfo(product);
+                        }
+                    }
+                });
+            }
+            
+            // Vérifier la proximité régulièrement
+            setInterval(checkProductProximity, 200);
+        }
+        
+        // Afficher les informations du produit
+        function showProductInfo(productMesh) {
+            if (currentProduct === productMesh) return;
+            
+            currentProduct = productMesh;
+            const product = productMesh.userData;
+            
+            document.getElementById('product-title').textContent = product.title;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('product-price').textContent = product.price.toFixed(2);
+            document.getElementById('product-info').classList.add('visible');
+            
+            // Animation de zoom vers le produit
+            isMoving = true;
+            const targetPosition = product.position.clone();
+            targetPosition.y += 1.6; // Hauteur des yeux
+            
+            const cameraDirection = new THREE.Vector3();
+            camera.getWorldDirection(cameraDirection);
+            cameraDirection.multiplyScalar(-1); // Inverser la direction
+            
+            const lookAtPosition = new THREE.Vector3().addVectors(
+                targetPosition,
+                cameraDirection.multiplyScalar(2)
+            );
+            
+            gsap.to(camera.position, {
+                x: lookAtPosition.x,
+                y: lookAtPosition.y,
+                z: lookAtPosition.z,
+                duration: 1,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    isMoving = false;
+                }
+            });
+            
+            gsap.to(camera.rotation, {
+                x: 0,
+                y: Math.atan2(
+                    product.position.x - camera.position.x,
+                    product.position.z - camera.position.z
+                ),
+                z: 0,
+                duration: 1,
+                ease: "power2.inOut"
+            });
+        }
+        
+        // Cacher les informations du produit
+        function hideProductInfo() {
+            document.getElementById('product-info').classList.remove('visible');
+            currentProduct = null;
+        }
+        
+        // Ajouter un produit au panier
+        function addToCart() {
+            if (!currentProduct) return;
+            
+            const product = currentProduct.userData;
+            cart.push(product);
+            updateCartUI();
+            
+            // Animation de feedback
+            const button = document.getElementById('add-to-cart');
+            button.textContent = "✓ Ajouté !";
+            setTimeout(() => {
+                button.textContent = `Ajouter au panier - ${product.price.toFixed(2)} €`;
+            }, 1000);
+            
+            // Animation du produit
+            gsap.to(currentProduct.scale, { 
+                x: 1.2, 
+                y: 1.2, 
+                z: 1.2, 
+                duration: 0.2, 
+                yoyo: true, 
+                repeat: 1 
+            });
+        }
+        
+        // Mettre à jour l'interface du panier
+        function updateCartUI() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-count').textContent = cart.length;
+            document.getElementById('cart-total').textContent = `- ${total.toFixed(2)} €`;
+        }
+        
+        // Gestion du redimensionnement de la fenêtre
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // Boucle d'animation
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animation des produits (rotation légère)
+            products.forEach(product => {
+                product.rotation.y += 0.005;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Démarrer la simulation de chargement
+        simulateLoading();
+    </script>
+</body>
+</html>
