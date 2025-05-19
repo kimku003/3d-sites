@@ -3,194 +3,360 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cube 3D Interactif</title>
+    <title>Rubik's Cube 3D Interactif</title>
     <style>
-        /* Styles CSS pour s'assurer que la toile occupe tout l'écran et est centrée */
         body {
             margin: 0;
-            overflow: hidden; /* Empêche les barres de défilement */
-            background-color: #111; /* Fond sombre */
+            overflow: hidden;
+            background-color: #222;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Pleine hauteur de la fenêtre */
-            font-family: 'Inter', sans-serif; /* Police Inter */
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
         }
         canvas {
-            display: block; /* Assure que le canvas est un élément bloc */
-            width: 100%; /* S'adapte à la largeur du conteneur */
-            height: 100%; /* S'adapte à la hauteur du conteneur */
+            display: block;
+            width: 100%;
+            height: 100%;
         }
         #controls-info {
             position: absolute;
-            bottom: 20px;
+            bottom: 10px; /* Adjusted position */
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
-            background-color: rgba(0,0,0,0.5);
-            padding: 10px 15px;
+            background-color: rgba(0,0,0,0.6);
+            padding: 8px 12px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
+            z-index: 10;
+        }
+        #controls-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.75);
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 10;
+        }
+        #controls-panel .face-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        #controls-panel .face-label {
+            color: white;
+            font-weight: bold;
+            width: 25px; /* Fixed width for alignment */
+            font-size: 15px;
+        }
+        #controls-panel button {
+            background-color: #4a4a4a;
+            color: white;
+            border: 1px solid #666;
+            padding: 7px 9px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            min-width: 40px; /* Minimum width for buttons */
+        }
+        #controls-panel button:hover {
+            background-color: #5a5a5a;
+        }
+        #controls-panel button:active {
+            background-color: #3a3a3a;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="controls-info">Faites glisser pour faire pivoter le cube</div>
+    <div id="controls-info">Faites glisser sur le cube pour le pivoter. Utilisez les boutons pour tourner les faces.</div>
+
+    <div id="controls-panel">
+        <div class="face-controls">
+            <span class="face-label">U:</span>
+            <button data-face="U" data-clockwise="true">U</button>
+            <button data-face="U" data-clockwise="false">U'</button>
+        </div>
+        <div class="face-controls">
+            <span class="face-label">D:</span>
+            <button data-face="D" data-clockwise="true">D</button>
+            <button data-face="D" data-clockwise="false">D'</button>
+        </div>
+        <div class="face-controls">
+            <span class="face-label">L:</span>
+            <button data-face="L" data-clockwise="true">L</button>
+            <button data-face="L" data-clockwise="false">L'</button>
+        </div>
+        <div class="face-controls">
+            <span class="face-label">R:</span>
+            <button data-face="R" data-clockwise="true">R</button>
+            <button data-face="R" data-clockwise="false">R'</button>
+        </div>
+        <div class="face-controls">
+            <span class="face-label">F:</span>
+            <button data-face="F" data-clockwise="true">F</button>
+            <button data-face="F" data-clockwise="false">F'</button>
+        </div>
+        <div class="face-controls">
+            <span class="face-label">B:</span>
+            <button data-face="B" data-clockwise="true">B</button>
+            <button data-face="B" data-clockwise="false">B'</button>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         // Variables globales
-        let scene, camera, renderer, cube;
+        let scene, camera, renderer, rubiksCubeGroup;
+        let allCubies = []; // Pour stocker tous les petits cubes (cubies)
         let isDragging = false;
-        let previousMousePosition = {
-            x: 0,
-            y: 0
+        let previousMousePosition = { x: 0, y: 0 };
+
+        const CUBIE_SIZE = 1;
+        const GAP = 0.08; // Espace entre les cubies
+        const LAYER_OFFSET = CUBIE_SIZE + GAP; // Position du centre des cubies de la couche externe
+
+        // Couleurs standard du Rubik's Cube
+        const COLORS = {
+            RED:    0xff0000, GREEN:  0x00ff00, BLUE:   0x0000ff,
+            YELLOW: 0xffff00, ORANGE: 0xffa500, WHITE:  0xffffff,
+            BLACK:  0x1A1A1A // Pour les faces internes
         };
 
-        // Initialisation de la scène 3D
+        let activeFaceRotation = null; // Gère l'animation de rotation d'une face
+        const FACE_ROTATION_SPEED = 0.07; // Vitesse de rotation des faces (radians par frame)
+
+        // Initialisation
         function init() {
-            // Création de la scène
             scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(5, 5, 7);
+            camera.lookAt(0, 0, 0);
 
-            // Création et positionnement de la caméra
-            // Le champ de vision (fov) est de 75 degrés.
-            // L'aspect ratio est basé sur la largeur et la hauteur de la fenêtre.
-            // Les plans de coupe near et far définissent la plage de rendu.
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5; // Positionne la caméra en retrait pour voir le cube
-
-            // Création du moteur de rendu WebGL
-            renderer = new THREE.WebGLRenderer({ antialias: true }); // Antialiasing pour des bords plus lisses
+            renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio); // Meilleure qualité sur les écrans haute résolution
-            document.body.appendChild(renderer.domElement); // Ajoute le canevas au corps du document
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
 
-            // Création de la géométrie du cube
-            // BoxGeometry prend la largeur, la hauteur et la profondeur comme arguments.
-            const geometry = new THREE.BoxGeometry(2, 2, 2); // Un cube de 2x2x2 unités
+            rubiksCubeGroup = new THREE.Group();
+            scene.add(rubiksCubeGroup); // Le groupe principal est ajouté à la scène
 
-            // Création du matériau du cube
-            // MeshPhongMaterial réagit à la lumière, permettant des reflets.
-            const material = new THREE.MeshPhongMaterial({
-                color: 0x0095DD, // Couleur bleue
-                shininess: 100,  // Brillance du matériau
-                specular: 0x111111 // Couleur des reflets spéculaires
-            });
+            const materials = { /* ... (comme avant) ... */
+                right: new THREE.MeshPhongMaterial({ color: COLORS.RED, shininess: 30, specular: COLORS.BLACK }),
+                left: new THREE.MeshPhongMaterial({ color: COLORS.ORANGE, shininess: 30, specular: COLORS.BLACK }),
+                top: new THREE.MeshPhongMaterial({ color: COLORS.WHITE, shininess: 30, specular: COLORS.BLACK }),
+                bottom: new THREE.MeshPhongMaterial({ color: COLORS.YELLOW, shininess: 30, specular: COLORS.BLACK }),
+                front: new THREE.MeshPhongMaterial({ color: COLORS.BLUE, shininess: 30, specular: COLORS.BLACK }),
+                back: new THREE.MeshPhongMaterial({ color: COLORS.GREEN, shininess: 30, specular: COLORS.BLACK }),
+                internal: new THREE.MeshPhongMaterial({ color: COLORS.BLACK, shininess: 10, specular: COLORS.BLACK })
+            };
 
-            // Création du maillage (mesh) du cube en combinant la géométrie et le matériau
-            cube = new THREE.Mesh(geometry, material);
-            scene.add(cube); // Ajoute le cube à la scène
+            // Création des 27 cubies
+            for (let x = -1; x <= 1; x++) {
+                for (let y = -1; y <= 1; y++) {
+                    for (let z = -1; z <= 1; z++) {
+                        const cubieGeometry = new THREE.BoxGeometry(CUBIE_SIZE, CUBIE_SIZE, CUBIE_SIZE);
+                        const cubieMaterials = [
+                            (x === 1) ? materials.right : materials.internal,
+                            (x === -1) ? materials.left : materials.internal,
+                            (y === 1) ? materials.top : materials.internal,
+                            (y === -1) ? materials.bottom : materials.internal,
+                            (z === 1) ? materials.front : materials.internal,
+                            (z === -1) ? materials.back : materials.internal
+                        ];
+                        const cubie = new THREE.Mesh(cubieGeometry, cubieMaterials);
+                        cubie.position.set(x * LAYER_OFFSET, y * LAYER_OFFSET, z * LAYER_OFFSET);
+                        rubiksCubeGroup.add(cubie);
+                        allCubies.push(cubie); // Ajoute à notre liste de référence
+                    }
+                }
+            }
 
-            // Ajout de lumières
-            // Lumière ambiante pour éclairer globalement la scène
-            const ambientLight = new THREE.AmbientLight(0x404040); // Lumière grise douce
+            // Lumières
+            const ambientLight = new THREE.AmbientLight(0x707070); // Lumière ambiante un peu plus forte
             scene.add(ambientLight);
+            const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight1.position.set(1, 1.5, 1).normalize();
+            scene.add(directionalLight1);
+            const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.6);
+            directionalLight2.position.set(-1, -1.5, -1).normalize();
+            scene.add(directionalLight2);
 
-            // Lumière directionnelle pour simuler une source de lumière distante (comme le soleil)
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Lumière blanche
-            directionalLight.position.set(5, 5, 5); // Position de la lumière
-            directionalLight.castShadow = true; // Permet à la lumière de projeter des ombres (non configuré ici)
-            scene.add(directionalLight);
+            // Gestion des événements pour la rotation du cube entier
+            renderer.domElement.addEventListener('mousedown', onPointerDown);
+            renderer.domElement.addEventListener('mousemove', onPointerMove);
+            renderer.domElement.addEventListener('mouseup', onPointerUp);
+            renderer.domElement.addEventListener('mouseout', onPointerUp);
+            renderer.domElement.addEventListener('touchstart', onPointerDown, { passive: false });
+            renderer.domElement.addEventListener('touchmove', onPointerMove, { passive: false });
+            renderer.domElement.addEventListener('touchend', onPointerUp);
 
-            // Ajout d'une lumière ponctuelle pour des reflets plus vifs
-            const pointLight = new THREE.PointLight(0xffffff, 0.5);
-            pointLight.position.set(-5, -5, 5);
-            scene.add(pointLight);
-
-
-            // Gestion des événements pour l'interaction (souris et toucher)
-            // Événements pour la souris (desktop)
-            renderer.domElement.addEventListener('mousedown', onMouseDown, false);
-            renderer.domElement.addEventListener('mousemove', onMouseMove, false);
-            renderer.domElement.addEventListener('mouseup', onMouseUp, false);
-            renderer.domElement.addEventListener('mouseout', onMouseUp, false); // Arrête le glissement si la souris sort du canvas
-
-            // Événements pour le toucher (mobile)
-            renderer.domElement.addEventListener('touchstart', onTouchStart, false);
-            renderer.domElement.addEventListener('touchmove', onTouchMove, false);
-            renderer.domElement.addEventListener('touchend', onTouchEnd, false);
-
-            // Gestion du redimensionnement de la fenêtre
+            // Gestion des événements pour les boutons de rotation des faces
+            document.querySelectorAll('#controls-panel button').forEach(button => {
+                button.addEventListener('click', () => {
+                    if (activeFaceRotation) return; // Empêche les rotations multiples simultanées
+                    const face = button.dataset.face;
+                    const clockwise = button.dataset.clockwise === 'true';
+                    startFaceRotation(face, clockwise);
+                });
+            });
             window.addEventListener('resize', onWindowResize, false);
         }
 
-        // Fonction appelée lors du redimensionnement de la fenêtre
+        // Redimensionnement de la fenêtre
         function onWindowResize() {
             camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix(); // Met à jour la matrice de projection de la caméra
+            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
-        // Fonctions de gestion des événements de la souris
-        function onMouseDown(event) {
+        // Rotation du cube entier (souris/tactile)
+        function onPointerDown(event) {
+            if (event.target.closest('#controls-panel')) return; // Ne pas glisser si on clique sur un bouton
             isDragging = true;
-            previousMousePosition.x = event.clientX;
-            previousMousePosition.y = event.clientY;
+            const x = event.clientX || (event.touches && event.touches[0].clientX);
+            const y = event.clientY || (event.touches && event.touches[0].clientY);
+            previousMousePosition.x = x;
+            previousMousePosition.y = y;
+            if (event.touches) event.preventDefault();
         }
+        function onPointerMove(event) {
+            if (!isDragging || activeFaceRotation) return; // Ne pas pivoter le cube entier si une face tourne
 
-        function onMouseMove(event) {
-            if (!isDragging) return;
+            const x = event.clientX || (event.touches && event.touches[0].clientX);
+            const y = event.clientY || (event.touches && event.touches[0].clientY);
+            if (x === undefined || y === undefined) return;
 
-            const deltaX = event.clientX - previousMousePosition.x;
-            const deltaY = event.clientY - previousMousePosition.y;
+            const deltaX = x - previousMousePosition.x;
+            const deltaY = y - previousMousePosition.y;
+            const rotationSpeed = 0.007;
 
-            // Rotation du cube en fonction du mouvement de la souris
-            // La vitesse de rotation peut être ajustée en modifiant le multiplicateur (0.01 ici)
-            cube.rotation.y += deltaX * 0.01;
-            cube.rotation.x += deltaY * 0.01;
+            rubiksCubeGroup.rotation.y += deltaX * rotationSpeed;
+            rubiksCubeGroup.rotation.x += deltaY * rotationSpeed;
 
-            previousMousePosition.x = event.clientX;
-            previousMousePosition.y = event.clientY;
+            previousMousePosition.x = x;
+            previousMousePosition.y = y;
+            if (event.touches) event.preventDefault();
         }
-
-        function onMouseUp() {
+        function onPointerUp() {
             isDragging = false;
         }
 
-        // Fonctions de gestion des événements tactiles
-        function onTouchStart(event) {
-            if (event.touches.length === 1) { // Gère uniquement le toucher simple
-                isDragging = true;
-                previousMousePosition.x = event.touches[0].clientX;
-                previousMousePosition.y = event.touches[0].clientY;
+        // Logique de rotation des faces
+        function getCubiesAndAxisForFace(face) {
+            const cubiesInFace = [];
+            const epsilon = 0.1; // Tolérance pour la comparaison des positions
+
+            let axisLetter; // 'x', 'y', ou 'z'
+            let targetCoordinateValue;
+
+            switch (face) {
+                case 'U': axisLetter = 'y'; targetCoordinateValue = LAYER_OFFSET; break;
+                case 'D': axisLetter = 'y'; targetCoordinateValue = -LAYER_OFFSET; break;
+                case 'R': axisLetter = 'x'; targetCoordinateValue = LAYER_OFFSET; break;
+                case 'L': axisLetter = 'x'; targetCoordinateValue = -LAYER_OFFSET; break;
+                case 'F': axisLetter = 'z'; targetCoordinateValue = LAYER_OFFSET; break;
+                case 'B': axisLetter = 'z'; targetCoordinateValue = -LAYER_OFFSET; break;
+                default: return { axis: null, cubies: [] };
             }
+
+            allCubies.forEach(cubie => {
+                // cubie.position est relative à rubiksCubeGroup
+                if (Math.abs(cubie.position[axisLetter] - targetCoordinateValue) < epsilon) {
+                    cubiesInFace.push(cubie);
+                }
+            });
+            return { axis: axisLetter, cubies: cubiesInFace };
         }
 
-        function onTouchMove(event) {
-            if (!isDragging || event.touches.length !== 1) return;
+        function startFaceRotation(face, clockwise) {
+            if (activeFaceRotation) return;
 
-            event.preventDefault(); // Empêche le défilement de la page sur mobile
+            const { axis: rotationAxisLetter, cubies } = getCubiesAndAxisForFace(face);
+            if (!cubies.length) return;
 
-            const deltaX = event.touches[0].clientX - previousMousePosition.x;
-            const deltaY = event.touches[0].clientY - previousMousePosition.y;
+            const pivot = new THREE.Group();
+            // Le pivot est positionné à l'origine du rubiksCubeGroup (qui est à l'origine de la scène)
+            // Si rubiksCubeGroup était déplacé, pivot devrait être ajouté à rubiksCubeGroup et sa position mise à (0,0,0) localement,
+            // ou ajouté à la scène et sa position/rotation synchronisée avec rubiksCubeGroup.
+            // Pour l'instant, rubiksCubeGroup est à (0,0,0) dans la scène.
+            scene.add(pivot);
 
-            cube.rotation.y += deltaX * 0.01;
-            cube.rotation.x += deltaY * 0.01;
 
-            previousMousePosition.x = event.touches[0].clientX;
-            previousMousePosition.y = event.touches[0].clientY;
-        }
+            cubies.forEach(cubie => {
+                // Attache le cubie au pivot. La position mondiale du cubie est conservée.
+                // Sa position/rotation locale est maintenant relative au pivot.
+                pivot.attach(cubie);
+            });
 
-        function onTouchEnd() {
-            isDragging = false;
+            let targetAngle;
+            // Détermination de l'angle de rotation basé sur la notation standard du Rubik's Cube
+            // (sens horaire vu de face) et le système de coordonnées de Three.js (main droite)
+            switch (face) {
+                case 'U': targetAngle = (clockwise ? -1 : 1) * Math.PI / 2; break; // Rotation autour de Y
+                case 'D': targetAngle = (clockwise ? 1 : -1) * Math.PI / 2; break; // Rotation autour de Y
+                case 'R': targetAngle = (clockwise ? -1 : 1) * Math.PI / 2; break; // Rotation autour de X
+                case 'L': targetAngle = (clockwise ? 1 : -1) * Math.PI / 2; break; // Rotation autour de X
+                case 'F': targetAngle = (clockwise ? -1 : 1) * Math.PI / 2; break; // Rotation autour de Z
+                case 'B': targetAngle = (clockwise ? 1 : -1) * Math.PI / 2; break; // Rotation autour de Z
+                default: return;
+            }
+
+            activeFaceRotation = {
+                pivot: pivot,
+                cubiesToRotate: cubies, // Renommé pour clarté
+                axis: rotationAxisLetter, // 'x', 'y', ou 'z'
+                targetAngle: targetAngle,
+                currentAngle: 0, // La rotation actuelle du pivot sur cet axe
+                onComplete: () => {
+                    activeFaceRotation.cubiesToRotate.forEach(cubie => {
+                        // S'assure que la matrice mondiale du cubie est à jour avant de le rattacher
+                        cubie.updateMatrixWorld();
+                        // Rattache le cubie au groupe principal. Sa position mondiale est conservée.
+                        // Sa position/rotation locale est maintenant relative à rubiksCubeGroup.
+                        rubiksCubeGroup.attach(cubie);
+                    });
+                    scene.remove(activeFaceRotation.pivot); // Nettoie le pivot
+                    activeFaceRotation.pivot.clear(); // Vide les enfants du pivot (même si attach les a déplacés)
+                    activeFaceRotation = null; // Rotation terminée
+                }
+            };
         }
 
         // Boucle d'animation
         function animate() {
-            requestAnimationFrame(animate); // Demande la prochaine frame d'animation
+            requestAnimationFrame(animate);
 
-            // Si aucune interaction n'est en cours, on peut ajouter une rotation automatique lente
-            if (!isDragging) {
-                 cube.rotation.x += 0.001;
-                 cube.rotation.y += 0.001;
+            if (activeFaceRotation) {
+                const ar = activeFaceRotation;
+                let increment = FACE_ROTATION_SPEED;
+                // Calcule l'angle restant pour atteindre la cible
+                let remainingAngle = ar.targetAngle - ar.pivot.rotation[ar.axis];
+
+                // Si l'incrément dépasse l'angle restant, on se positionne directement à la cible
+                if (Math.abs(remainingAngle) < Math.abs(increment)) {
+                    ar.pivot.rotation[ar.axis] = ar.targetAngle;
+                    ar.onComplete();
+                } else {
+                    // Sinon, on incrémente la rotation
+                    ar.pivot.rotation[ar.axis] += Math.sign(remainingAngle) * increment;
+                }
+            } else if (!isDragging) { // Petite rotation automatique du cube entier si inactif
+                // rubiksCubeGroup.rotation.x += 0.0003;
+                // rubiksCubeGroup.rotation.y += 0.0003;
             }
-
-            renderer.render(scene, camera); // Rendu de la scène
+            renderer.render(scene, camera);
         }
 
-        // Démarrage de l'initialisation et de l'animation après le chargement de la fenêtre
+        // Démarrage
         window.onload = function() {
             init();
             animate();
