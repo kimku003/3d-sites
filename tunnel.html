@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-B">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation 3D d'un Tunnel</title>
+    <style>
+        /* Styles CSS pour s'assurer que la toile occupe tout l'écran */
+        body { margin: 0; overflow: hidden; background-color: #000; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Variables globales pour la scène, la caméra, le moteur de rendu et les objets du tunnel
+        let scene, camera, renderer;
+        let tunnel, tunnelSegments = [];
+        const segmentLength = 20; // Longueur de chaque segment du tunnel
+        const tunnelRadius = 10;  // Rayon du tunnel
+        const numSegments = 50;   // Nombre de segments visibles à la fois
+        const speed = 0.2;        // Vitesse de déplacement de la caméra
+
+        // Initialisation de la scène
+        function init() {
+            // Création de la scène
+            scene = new THREE.Scene();
+
+            // Création et positionnement de la caméra
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5; // Position initiale de la caméra légèrement en avant
+
+            // Création du moteur de rendu WebGL
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement); // Ajout du canevas au corps du document
+
+            // Création de la géométrie et du matériau du tunnel
+            const segmentGeometry = new THREE.CylinderGeometry(tunnelRadius, tunnelRadius, segmentLength, 32, 1, true);
+            // Utilisation d'un matériau de base avec une couleur et en le rendant visible des deux côtés
+            const segmentMaterial = new THREE.MeshPhongMaterial({
+                color: 0x5555ff, // Couleur bleuâtre pour le tunnel
+                side: THREE.DoubleSide, // Rend les faces intérieures et extérieures visibles
+                shininess: 50,
+                specular: 0x333333
+            });
+
+            // Création et positionnement des segments du tunnel
+            for (let i = 0; i < numSegments; i++) {
+                const segment = new THREE.Mesh(segmentGeometry, segmentMaterial);
+                // Positionne chaque segment l'un après l'autre le long de l'axe Z
+                segment.position.z = i * -segmentLength;
+                // Rotation pour que le cylindre soit orienté comme un tunnel
+                segment.rotation.x = Math.PI / 2;
+                tunnelSegments.push(segment);
+                scene.add(segment);
+            }
+
+            // Ajout de lumières à la scène
+            const ambientLight = new THREE.AmbientLight(0x404040); // Lumière ambiante douce
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xffffff, 1, 300); // Lumière ponctuelle
+            pointLight.position.set(0, 0, -segmentLength * numSegments / 3); // Positionnée à l'intérieur du tunnel
+            scene.add(pointLight);
+
+            // Gestion du redimensionnement de la fenêtre
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        // Fonction appelée lors du redimensionnement de la fenêtre
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Boucle d'animation
+        function animate() {
+            requestAnimationFrame(animate); // Demande la prochaine frame d'animation
+
+            // Déplacement de chaque segment du tunnel
+            tunnelSegments.forEach(segment => {
+                segment.position.z += speed; // Déplace le segment vers la caméra
+
+                // Si un segment sort du champ de vision de la caméra (derrière elle),
+                // le repositionne à l'autre extrémité du tunnel pour créer un effet infini.
+                if (segment.position.z > camera.position.z + segmentLength) {
+                    segment.position.z -= numSegments * segmentLength;
+                }
+            });
+
+            // Optionnel : légère oscillation de la caméra pour un effet plus dynamique
+            // camera.position.x = Math.sin(Date.now() * 0.0005) * 0.5;
+            // camera.position.y = Math.cos(Date.now() * 0.0005) * 0.5;
+
+            renderer.render(scene, camera); // Rendu de la scène
+        }
+
+        // Démarrage de l'initialisation et de l'animation après le chargement de la fenêtre
+        window.onload = function() {
+            init();
+            animate();
+        };
+    </script>
+</body>
+</html>
+
