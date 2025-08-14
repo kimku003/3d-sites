@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -101,9 +102,10 @@
 <body class="min-h-screen">
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-opacity-90 bg-slate-900 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up"
+     data-aos-duration="3000">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
+                <div class="flex items-center ">
                     <div class="flex-shrink-0">
                         <span class="text-2xl font-bold gradient-text">Kimku ETOUH</span>
                     </div>
@@ -126,7 +128,8 @@
         </div>
         
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900">
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900" data-aos="fade-up"
+     data-aos-duration="3000">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-indigo-300 hover:text-white hover:bg-slate-800 transition">Accueil</a>
                 <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition">À propos</a>
@@ -139,7 +142,8 @@
 
     <!-- Hero Section -->
     <section id="home" class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center" data-aos="fade-up"
+     data-aos-duration="3000">
             <div class="text-center md:text-left">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></h1>
                 <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack</h2>
@@ -199,13 +203,15 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-12">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="gradient-text">À propos</span> de moi</h2>
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-12" >
+        <div class="text-center mb-16" data-aos="fade-up"
+     data-aos-duration="3000">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="gradient-text" >À propos</span> de moi</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center" data-aos="fade-up"
+     data-aos-duration="3000">
             <div class="relative">
                 <div class="w-full h-80 md:h-96 bg-slate-700 rounded-2xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20"></div>
@@ -221,7 +227,8 @@
                 <h3 class="text-2xl font-bold mb-6">Je suis un passionné de développement web</h3>
                 <p class="text-gray-300 mb-6">Avec une panoplie de projets créés, j'ai eu l'opportunité de travailler sur divers projets allant des simples sites vitrines aux applications web et android complexes. Mon approche combine créativité et rigueur technique pour offrir des solutions optimales.</p>
                 
-                <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="grid grid-cols-2 gap-4 mb-8" data-aos="fade-up"
+     data-aos-duration="3000">
                     <div class="bg-slate-700 bg-opacity-50 p-4 rounded-xl">
                         <div class="flex items-center mb-2">
                             <div class="w-8 h-8 rounded-full bg-indigo-900 flex items-center justify-center mr-3">
@@ -232,7 +239,8 @@
                         <p class="text-sm text-gray-300">3 + ans dans le développement web fullstack</p>
                     </div>
                     <div class="bg-slate-700 bg-opacity-50 p-4 rounded-xl">
-                        <div class="flex items-center mb-2">
+                        <div class="flex items-center mb-2" data-aos="fade-up"
+     data-aos-duration="3000">
                             <div class="w-8 h-8 rounded-full bg-purple-900 flex items-center justify-center mr-3">
                                 <i class="fas fa-project-diagram text-purple-400"></i>
                             </div>
@@ -242,7 +250,8 @@
                     </div>
                 </div>
                 
-                <div class="bg-slate-700 bg-opacity-50 p-6 rounded-xl">
+                <div class="bg-slate-700 bg-opacity-50 p-6 rounded-xl" data-aos="fade-up"
+     data-aos-duration="3000">
                     <h4 class="font-semibold mb-4">Ma philosophie</h4>
                     <p class="text-gray-300 mb-4">Je crois en un développement centré sur l'utilisateur, où chaque ligne de code a un impact sur l'expérience finale. La performance, l'accessibilité et la maintenabilité sont au cœur de ma pratique.</p>
                     <div class="flex items-center">
@@ -257,13 +266,15 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" >
+        <div class="text-center mb-16" data-aos="fade-up"
+     data-aos-duration="3000">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes <span class="gradient-text">compétences</span></h2>
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12" data-aos="fade-up"
+     data-aos-duration="3000">
             <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl hover:bg-opacity-70 transition">
                 <div class="w-16 h-16 rounded-full bg-indigo-900 flex items-center justify-center mb-6 mx-auto">
                     <i class="fas fa-laptop-code text-3xl text-indigo-400"></i>
@@ -351,7 +362,8 @@
             </div>
         </div>
         
-        <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl">
+        <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl" data-aos="fade-up"
+     data-aos-duration="3000">
             <h3 class="text-xl font-bold text-center mb-6">Niveau de compétences</h3>
             <div class="space-y-6">
                 <div>
@@ -414,12 +426,14 @@
 
     <!-- Projects Section -->
     <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-12">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16" data-aos="fade-up"
+     data-aos-duration="3000">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes <span class="gradient-text">projets</span> récents</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up"
+     data-aos-duration="3000">
             <!-- Project 1 -->
             <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div class="relative h-48 overflow-hidden">
@@ -588,7 +602,8 @@
             </div>
         </div>
         
-        <div class="text-center mt-12">
+        <div class="text-center mt-12" data-aos="fade-up"
+     data-aos-duration="3000">
             <a href="https://github.com/kimku003"" class="inline-flex items-center px-6 py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">
                 Voir plus de projets <i class="fas fa-arrow-right ml-2"></i>
             </a>
@@ -597,12 +612,14 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16" data-aos="fade-up"
+     data-aos-duration="3000">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Me <span class="gradient-text">contacter</span></h2>
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12" data-aos="fade-up"
+     data-aos-duration="3000">
             <div>
                 <h3 class="text-2xl font-bold mb-6">Travaillons ensemble</h3>
                 <p class="text-gray-400 mb-8">Que vous ayez un projet en tête ou simplement une question, n'hésitez pas à me contacter. Je suis toujours ouvert à de nouvelles opportunités et collaborations.</p>
@@ -658,7 +675,8 @@
                 </div>
             </div>
             
-            <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl">
+            <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl" data-aos="fade-up"
+     data-aos-duration="3000">
                 <form id="contact-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -694,7 +712,8 @@
 
     <!-- Footer -->
     <footer class="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="fade-up"
+     data-aos-duration="3000">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <span class="text-2xl font-bold gradient-text">Portfolio3D</span>
@@ -715,7 +734,8 @@
                     </a>
                 </div>
             </div>
-            <div class="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center" data-aos="fade-up"
+     data-aos-duration="3000">
                 <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Kim ku ETOUH. Tous droits réservés.</p>
                 <div class="flex space-x-6">
                     <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition">Mentions légales</a>
@@ -891,5 +911,9 @@
             });
         });
     </script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </body>
 </html>
