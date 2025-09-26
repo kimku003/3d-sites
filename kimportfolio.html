@@ -218,9 +218,9 @@
                     <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-slate-900 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-indigo-500 border-opacity-50 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Développeur" class="w-full h-full object-cover">
+                            <img src="images/me.png" alt="Développeur" class="w-full h-full object-cover">
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
             <div>
@@ -631,7 +631,7 @@
                         </div>
                         <div>
                             <h4 class="font-semibold">Email</h4>
-                            <a href="mailto:contact@alexdupont.dev" class="text-indigo-400 hover:text-indigo-300">kimku679@gmail.com</a>
+                            <a href="mailto:kimku679@gmail.com" class="text-indigo-400 hover:text-indigo-300">kimku679@gmail.com</a>
                         </div>
                     </div>
                     
@@ -641,7 +641,7 @@
                         </div>
                         <div>
                             <h4 class="font-semibold">Téléphone</h4>
-                            <a href="tel:+33612345678" class="text-purple-400 hover:text-purple-300">+229 0194248190</a>
+                            <a href="tel:+2290194248190" class="text-purple-400 hover:text-purple-300">+229 0194248190</a>
                         </div>
                     </div>
                     
@@ -908,6 +908,119 @@
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut"
+            });
+            
+            // Intercept clicks on project links and GitHub buttons to show private repo alert
+            const projectCards = document.querySelectorAll('#projects .project-card');
+            const showPrivateAlert = (e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                alert('Ce projet est dans un dépôt privé, veuillez me contacter pour en savoir plus');
+            };
+            
+            projectCards.forEach(card => {
+                const links = Array.from(card.querySelectorAll('a'));
+                const viewLink = links.find(a => a.textContent && a.textContent.trim().startsWith('Voir le projet'));
+                const githubIcon = card.querySelector('a .fa-github');
+                const githubLink = githubIcon ? githubIcon.closest('a') : null;
+                
+                [viewLink, githubLink].forEach(link => {
+                    if (link) {
+                        // Use capture to ensure this runs before other click handlers (e.g., smooth scroll)
+                        link.addEventListener('click', showPrivateAlert, true);
+                    }
+                });
+            });
+
+            // Add toggle buttons to each section to collapse/expand content
+            const allSections = document.querySelectorAll('section');
+            allSections.forEach(section => {
+                // Ensure section is position relative for absolute toggle placement
+                if (!section.classList.contains('relative')) {
+                    section.classList.add('relative');
+                }
+
+                // Create toggle button
+                const toggleBtn = document.createElement('button');
+                toggleBtn.type = 'button';
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                toggleBtn.className = 'toggle-section-btn absolute top-3 right-3 z-10 px-3 py-1 text-xs rounded-md border border-slate-600 bg-slate-800/70 hover:bg-slate-700 transition';
+                toggleBtn.innerHTML = '<i class="fa fa-minus mr-1"></i> Réduire';
+
+                // Create placeholder shown when collapsed
+                const headingNode = section.querySelector('h2, h1, h3, h4');
+                const rawTitle = headingNode ? (headingNode.textContent || '').trim() : (section.id || 'Section');
+                const title = rawTitle.length > 60 ? rawTitle.slice(0, 57) + '…' : rawTitle;
+
+                const placeholder = document.createElement('div');
+                placeholder.className = 'section-collapsed-placeholder hidden mt-12 mx-3 px-4 py-3 rounded-md bg-slate-800/70 border border-slate-700 text-sm text-gray-300';
+                placeholder.textContent = title;
+
+                // Insert into section
+                section.appendChild(toggleBtn);
+                section.appendChild(placeholder);
+
+                // Toggle behavior
+                let isCollapsed = false;
+                const collapse = () => {
+                    isCollapsed = true;
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    toggleBtn.innerHTML = '<i class="fa fa-plus mr-1"></i> Agrandir';
+                    Array.from(section.children).forEach(child => {
+                        if (child === toggleBtn || child === placeholder) return;
+                        // Keep headings visible if they are direct children
+                        if (child.tagName && /^(H1|H2|H3|H4)$/i.test(child.tagName)) return;
+                        if (!(child instanceof HTMLElement)) return;
+                        if (child.style.display === 'none') return;
+                        child.setAttribute('data-hidden-by-toggle', 'true');
+                        child.setAttribute('aria-hidden', 'true');
+                        child.style.display = 'none';
+                    });
+                    placeholder.classList.remove('hidden');
+                    // Refresh AOS/ScrollTrigger to fix subsequent section animations
+                    requestAnimationFrame(() => {
+                        if (window.AOS && typeof window.AOS.refresh === 'function') {
+                            window.AOS.refresh();
+                        }
+                        if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+                            window.ScrollTrigger.refresh();
+                        }
+                        window.dispatchEvent(new Event('resize'));
+                    });
+                };
+
+                const expand = () => {
+                    isCollapsed = false;
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                    toggleBtn.innerHTML = '<i class="fa fa-minus mr-1"></i> Réduire';
+                    Array.from(section.children).forEach(child => {
+                        if (!(child instanceof HTMLElement)) return;
+                        if (child.getAttribute('data-hidden-by-toggle') === 'true') {
+                            child.style.display = '';
+                            child.removeAttribute('data-hidden-by-toggle');
+                            child.removeAttribute('aria-hidden');
+                        }
+                    });
+                    placeholder.classList.add('hidden');
+                    // Refresh AOS/ScrollTrigger to recalc positions after expanding
+                    requestAnimationFrame(() => {
+                        if (window.AOS && typeof window.AOS.refresh === 'function') {
+                            window.AOS.refresh();
+                        }
+                        if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+                            window.ScrollTrigger.refresh();
+                        }
+                        window.dispatchEvent(new Event('resize'));
+                    });
+                };
+
+                toggleBtn.addEventListener('click', () => {
+                    if (isCollapsed) {
+                        expand();
+                    } else {
+                        collapse();
+                    }
+                });
             });
         });
     </script>
