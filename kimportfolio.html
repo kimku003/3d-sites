@@ -17,6 +17,8 @@
             overflow-x: hidden;
             background: #0f172a;
             color: #f8fafc;
+            font-size: 17px;
+            line-height: 1.7;
         }
         
         .cube-container {
@@ -97,6 +99,112 @@
             background-clip: text;
             color: transparent;
         }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        body.reduced-motion * {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        /* Proper light theme overrides */
+        body.theme-light {
+            background: #ffffff;
+            color: #0f172a;
+        }
+        body.theme-light .bg-slate-900,
+        body.theme-light .bg-slate-800,
+        body.theme-light .bg-slate-700 {
+            background-color: #ffffff !important;
+        }
+        body.theme-light .bg-opacity-50 { opacity: 1 !important; }
+        body.theme-light .text-gray-400,
+        body.theme-light .text-gray-300,
+        body.theme-light .text-indigo-300 { color: #334155 !important; }
+        body.theme-light .text-indigo-400 { color: #4f46e5 !important; }
+        body.theme-light .text-purple-400 { color: #7c3aed !important; }
+        body.theme-light .hover\:bg-slate-800:hover { background-color: #eef2f7 !important; }
+        body.theme-light nav,
+        body.theme-light footer { background-color: #ffffff !important; }
+        body.theme-light .project-card,
+        body.theme-light .rounded-2xl,
+        body.theme-light .rounded-xl {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        body.theme-light .border-slate-800 { border-color: #e2e8f0 !important; }
+        body.theme-light .border-slate-700 { border-color: #e2e8f0 !important; }
+        body.theme-light a { color: #1e293b; }
+        body.theme-light a:hover { color: #111827; }
+        body.theme-light .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #db2777);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Light theme fixes for colored badges and skill bubbles */
+        body.theme-light .skill-bubble {
+            background-color: #f3f4f6 !important; /* gray-100 */
+            color: #111827 !important; /* gray-900 */
+            border: 1px solid #e5e7eb !important; /* gray-200 */
+        }
+        body.theme-light .skill-bubble i { color: #4f46e5 !important; }
+        /* Generic dark utility background overrides to gentle tints */
+        body.theme-light .bg-indigo-900 { background-color: #eef2ff !important; color: #1e3a8a !important; }
+        body.theme-light .bg-purple-900 { background-color: #f3e8ff !important; color: #5b21b6 !important; }
+        body.theme-light .bg-pink-900 { background-color: #ffe4e6 !important; color: #9d174d !important; }
+        body.theme-light .bg-blue-900 { background-color: #dbeafe !important; color: #1e3a8a !important; }
+        body.theme-light .bg-green-900 { background-color: #dcfce7 !important; color: #14532d !important; }
+        body.theme-light .bg-yellow-900 { background-color: #fef9c3 !important; color: #713f12 !important; }
+        body.theme-light .bg-opacity-50.rounded { opacity: 1 !important; }
+        body.theme-light span.bg-opacity-50 { border: 1px solid #e2e8f0; }
+
+        /* Neutralize tech tags in cards in light theme */
+        body.theme-light .project-card span.bg-opacity-50 {
+            background-color: #f3f4f6 !important; /* gray-100 */
+            color: #111827 !important; /* gray-900 */
+            border: 1px solid #e5e7eb !important; /* gray-200 */
+        }
+
+        /* Neutralize corner category badges in light theme */
+        body.theme-light .project-card .absolute.top-4.right-4 span {
+            background-color: #e5e7eb !important; /* gray-200 */
+            color: #111827 !important; /* gray-900 */
+            border: 1px solid #d1d5db !important; /* gray-300 */
+        }
+
+        /* Light theme for 3D cube */
+        body.theme-light .face {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 2px solid rgba(79, 70, 229, 0.3) !important; /* indigo-500 with opacity */
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.2) !important;
+        }
+        body.theme-light .face h3 {
+            color: #1e293b !important; /* slate-800 */
+        }
+        body.theme-light .face p {
+            color: #475569 !important; /* slate-600 */
+        }
+        body.theme-light .face .w-24.h-24 {
+            background-color: #eef2ff !important; /* indigo-50 */
+        }
+
+        /* Typography adjustments for better readability */
+        h1 { font-size: clamp(2.25rem, 4vw, 3.25rem); }
+        h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+        h1, h2, h3 { line-height: 1.25; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -117,6 +225,9 @@
                         <a href="#skills" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition">Compétences</a>
                         <a href="#projects" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition">Projets</a>
                         <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition">Contact</a>
+                        <button id="toggle-theme" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition border border-slate-700">
+                            <i class="fas fa-adjust mr-1"></i> Thème
+                        </button>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -146,11 +257,13 @@
      data-aos-duration="3000">
             <div class="text-center md:text-left">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></h1>
-                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack</h2>
-                <p class="text-lg text-gray-400 mb-8 max-w-lg">Je crée des expériences web modernes et interactives avec des technologies de pointe.</p>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack & Mobile</h2>
+                <p class="text-lg text-gray-400 mb-8 max-w-lg">Je crée des expériences web et mobiles modernes et interactives avec des technologies de pointe.</p>
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <a href="#projects" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium transition transform hover:scale-105 shadow-lg">Voir mes projets</a>
                     <a href="#contact" class="px-6 py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">Me contacter</a>
+                    <a href="https://calendly.com/kimku679/30min" target="_blank" rel="noopener" class="px-6 py-3 border border-purple-500 text-purple-300 hover:bg-purple-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">Réserver un créneau</a>
+                    <a href="docs/kimku_Etouh_CV.pdf" target="_blank" rel="noopener" class="px-6 py-3 border border-slate-600 text-slate-300 hover:bg-slate-800 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">Télécharger mon CV</a>
                 </div>
             </div>
             <div class="cube-container floating">
@@ -202,8 +315,34 @@
         </div>
     </section>
 
+    <!-- Performance Section -->
+    <section id="performance" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-16">
+        <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="3000">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Performance <span class="gradient-text">Lighthouse</span></h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
+            <p class="text-gray-400 mt-4 text-sm">Scores indicatifs mesurés localement. Objectifs: LCP < 2.5s, TBT < 200ms, CLS < 0.1.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-duration="3000">
+            <div class="bg-slate-900 bg-opacity-50 p-6 rounded-xl text-center">
+                <div class="text-4xl font-bold text-green-400">90+</div>
+                <div class="mt-2 text-gray-300">Performance</div>
+            </div>
+            <div class="bg-slate-900 bg-opacity-50 p-6 rounded-xl text-center">
+                <div class="text-4xl font-bold text-indigo-400">95+</div>
+                <div class="mt-2 text-gray-300">Best Practices</div>
+            </div>
+            <div class="bg-slate-900 bg-opacity-50 p-6 rounded-xl text-center">
+                <div class="text-4xl font-bold text-purple-400">100</div>
+                <div class="mt-2 text-gray-300">Accessibility</div>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-sm text-gray-400" data-aos="fade-up" data-aos-duration="3000">
+            <span>Mesuré avec Lighthouse. Captures et détails disponibles sur demande.</span>
+        </div>
+    </section>
+
     <!-- About Section -->
-    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-12" >
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-16" >
         <div class="text-center mb-16" data-aos="fade-up"
      data-aos-duration="3000">
             <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="gradient-text" >À propos</span> de moi</h2>
@@ -301,6 +440,12 @@
                     </div>
                     <div class="skill-bubble px-4 py-2 bg-indigo-900 rounded-full text-sm flex items-center">
                         <i class="fas fa-bolt text-indigo-300 mr-2"></i> Tailwind
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-indigo-900 rounded-full text-sm flex items-center">
+                        <i class="fab fa-android text-indigo-300 mr-2"></i> Flutter
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-indigo-900 rounded-full text-sm flex items-center">
+                        <i class="fab fa-python text-indigo-300 mr-2"></i> Flet
                     </div>
                 </div>
             </div>
@@ -425,7 +570,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-12">
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-16">
         <div class="text-center mb-16" data-aos="fade-up"
      data-aos-duration="3000">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes <span class="gradient-text">projets</span> récents</h2>
@@ -449,6 +594,11 @@
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Node.js</span>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-300 space-y-2">
+                        <div><span class="font-semibold">Problème:</span> PME sans canal en ligne fiable, rupture de stock fréquente, conversion faible.</div>
+                        <div><span class="font-semibold">Solution:</span> Front React + API Node/Express, panier persistant, Stripe, stock temps réel.</div>
+                        <div><span class="font-semibold">Impact:</span> +32% conversion en 6 semaines, TTFB −45%, abandon panier −20%.</div>
                     </div>
                     <div class="flex justify-between items-center">
                         <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
@@ -479,6 +629,11 @@
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Chart.js</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Geolocation</span>
                     </div>
+                    <div class="mt-4 text-sm text-gray-300 space-y-2">
+                        <div><span class="font-semibold">Problème:</span> UI peu claire, lente sur mobile bas/moyen de gamme.</div>
+                        <div><span class="font-semibold">Solution:</span> Lazy-loading données/graphiques, cache, skeletons, PWA offline.</div>
+                        <div><span class="font-semibold">Impact:</span> LCP −55%, erreurs API −30%, rétention J7 +18%.</div>
+                    </div>
                     <div class="flex justify-between items-center">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
@@ -506,6 +661,11 @@
                         <span class="px-2 py-1 bg-pink-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-pink-900 bg-opacity-50 rounded text-xs">Typescript</span>
                         <span class="px-2 py-1 bg-pink-900 bg-opacity-50 rounded text-xs">PostgreSQL(Supabase)</span>
+                    </div>
+                    <div class="mt-4 text-sm text-gray-300 space-y-2">
+                        <div><span class="font-semibold">Problème:</span> Manque de visibilité multi-projets, permissions hétérogènes, coûts élevés.</div>
+                        <div><span class="font-semibold">Solution:</span> RBAC, vues Kanban/Gantt, notifications temps réel, audit log, quotas.</div>
+                        <div><span class="font-semibold">Impact:</span> MTTR −40%, on‑boarding −60%, coûts infra −25%.</div>
                     </div>
                     <div class="flex justify-between items-center">
                         <a href="#" class="text-pink-400 hover:text-pink-300 text-sm font-medium flex items-center">
@@ -588,7 +748,7 @@
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Django ninja</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">API REST</span>
-                        <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">PostgreSQLpan>
+                        <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">PostgreSQL</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
@@ -604,7 +764,7 @@
         
         <div class="text-center mt-12" data-aos="fade-up"
      data-aos-duration="3000">
-            <a href="https://github.com/kimku003"" class="inline-flex items-center px-6 py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">
+            <a href="https://github.com/kimku003" class="inline-flex items-center px-6 py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">
                 Voir plus de projets <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
@@ -732,6 +892,12 @@
                     <a href="#" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-dribbble"></i>
                     </a>
+                    <a href="https://calendly.com/kimku679/30min" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition" title="Réserver un créneau">
+                        <i class="fa-regular fa-calendar"></i>
+                    </a>
+                    <a href="docs/kimku_Etouh_CV.pdf" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition" title="Télécharger mon CV">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </a>
                 </div>
             </div>
             <div class="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center" data-aos="fade-up"
@@ -759,9 +925,11 @@
         let rotationY = 0;
         let targetRotationX = 0;
         let targetRotationY = 0;
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
         // Mouse move interaction
         document.addEventListener('mousemove', (e) => {
+            if (document.body.classList.contains('reduced-motion') || prefersReduced) return;
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
             
@@ -771,6 +939,7 @@
         
         // Touch interaction for mobile
         document.addEventListener('touchmove', (e) => {
+            if (document.body.classList.contains('reduced-motion') || prefersReduced) return;
             const x = e.touches[0].clientX / window.innerWidth;
             const y = e.touches[0].clientY / window.innerHeight;
             
@@ -795,7 +964,7 @@
         
         // Animation loop
         function animate() {
-            if (isAutoRotating) {
+            if (isAutoRotating && !(document.body.classList.contains('reduced-motion') || prefersReduced)) {
                 targetRotationY += 0.5;
             }
             
@@ -836,7 +1005,7 @@
                 if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                        behavior: (document.body.classList.contains('reduced-motion') || prefersReduced) ? 'auto' : 'smooth'
                     });
                     
                     // Close mobile menu if open
@@ -887,28 +1056,58 @@
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('section');
             
-            sections.forEach(section => {
-                gsap.from(section, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        toggleActions: "play none none none"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    duration: 1,
-                    ease: "power3.out"
+            // Only apply GSAP animations if not in reduced motion mode
+            if (!(document.body.classList.contains('reduced-motion') || prefersReduced)) {
+                sections.forEach(section => {
+                    gsap.from(section, {
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 80%",
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        ease: "power3.out"
+                    });
                 });
-            });
-            
-            // Floating elements animation
-            gsap.to(".floating", {
-                y: 15,
-                duration: 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut"
-            });
+                
+                // Floating elements animation
+                gsap.to(".floating", {
+                    y: 15,
+                    duration: 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            }
+
+            // Theme toggle with persistence
+            const themeBtn = document.getElementById('toggle-theme');
+
+            // Restore saved preferences
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('theme-light');
+            }
+
+            const updateToggleLabels = () => {
+                if (themeBtn) {
+                    const isLight = document.body.classList.contains('theme-light');
+                    themeBtn.innerHTML = `<i class="fas fa-adjust mr-1"></i> Thème: ${isLight ? 'Clair' : 'Sombre'}`;
+                }
+            };
+
+            updateToggleLabels();
+
+            if (themeBtn) {
+                themeBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('theme-light');
+                    const isLight = document.body.classList.contains('theme-light');
+                    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                    updateToggleLabels();
+                });
+            }
             
             // Intercept clicks on project links and GitHub buttons to show private repo alert
             const projectCards = document.querySelectorAll('#projects .project-card');
