@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="rgba(0,0,0,0.35)"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <g opacity="0.25">
+    <circle cx="150" cy="130" r="90" fill="url(#g)"/>
+    <circle cx="1100" cy="520" r="140" fill="url(#g)"/>
+    <circle cx="980" cy="140" r="70" fill="url(#g)"/>
+  </g>
+  <rect x="80" y="80" width="1040" height="470" rx="28" fill="#111827" stroke="url(#g)" stroke-width="2" filter="url(#shadow)"/>
+  <g transform="translate(120,150)">
+    <text x="0" y="0" fill="#c7d2fe" font-family="Poppins, Arial, sans-serif" font-size="24">Projet</text>
+    <text x="0" y="70" fill="url(#g)" font-family="Poppins, Arial, sans-serif" font-size="72" font-weight="700">AI Smartlink</text>
+    <text x="0" y="120" fill="#94a3b8" font-family="Poppins, Arial, sans-serif" font-size="22">Générateur de liens intelligents piloté par IA avec analytique</text>
+    <g transform="translate(0,170)" font-family="Poppins, Arial, sans-serif" font-size="18">
+      <rect x="0" y="-24" width="110" height="36" rx="8" fill="#1f2937" stroke="#374151"/>
+      <text x="16" y="0" fill="#a5b4fc">React</text>
+      <rect x="130" y="-24" width="120" height="36" rx="8" fill="#1f2937" stroke="#374151"/>
+      <text x="146" y="0" fill="#a5b4fc">Node.js</text>
+      <rect x="270" y="-24" width="140" height="36" rx="8" fill="#1f2937" stroke="#374151"/>
+      <text x="286" y="0" fill="#a5b4fc">PostgreSQL</text>
+    </g>
+  </g>
+</svg>
