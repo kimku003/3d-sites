@@ -23,9 +23,16 @@
         
         .cube-container {
             perspective: 1000px;
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             margin: 0 auto;
+        }
+        
+        @media (max-width: 640px) {
+            .cube-container {
+                width: 200px;
+                height: 200px;
+            }
         }
         
         .cube {
@@ -38,8 +45,8 @@
         
         .face {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             border: 2px solid rgba(99, 102, 241, 0.5);
             display: flex;
             justify-content: center;
@@ -49,12 +56,39 @@
             backface-visibility: visible;
         }
         
-        .front { transform: translateZ(150px); }
-        .back { transform: rotateY(180deg) translateZ(150px); }
-        .right { transform: rotateY(90deg) translateZ(150px); }
-        .left { transform: rotateY(-90deg) translateZ(150px); }
-        .top { transform: rotateX(90deg) translateZ(150px); }
-        .bottom { transform: rotateX(-90deg) translateZ(150px); }
+        @media (max-width: 640px) {
+            .face {
+                width: 200px;
+                height: 200px;
+                padding: 1rem;
+            }
+            .face h3 {
+                font-size: 0.875rem;
+            }
+            .face p {
+                font-size: 0.75rem;
+            }
+            .face .w-24.h-24 {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+        
+        .front { transform: translateZ(125px); }
+        .back { transform: rotateY(180deg) translateZ(125px); }
+        .right { transform: rotateY(90deg) translateZ(125px); }
+        .left { transform: rotateY(-90deg) translateZ(125px); }
+        .top { transform: rotateX(90deg) translateZ(125px); }
+        .bottom { transform: rotateX(-90deg) translateZ(125px); }
+        
+        @media (max-width: 640px) {
+            .front { transform: translateZ(100px); }
+            .back { transform: rotateY(180deg) translateZ(100px); }
+            .right { transform: rotateY(90deg) translateZ(100px); }
+            .left { transform: rotateY(-90deg) translateZ(100px); }
+            .top { transform: rotateX(90deg) translateZ(100px); }
+            .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        }
         
         .skill-bubble {
             transition: all 0.3s;
@@ -201,10 +235,90 @@
         }
 
         /* Typography adjustments for better readability */
-        h1 { font-size: clamp(2.25rem, 4vw, 3.25rem); }
-        h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
-        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
-        h1, h2, h3 { line-height: 1.25; }
+        h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+        h3 { font-size: clamp(1.125rem, 3vw, 1.5rem); }
+        h1, h2, h3 { line-height: 1.2; }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            
+            .project-card {
+                margin-bottom: 1rem;
+            }
+            
+            .skill-bubble {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.5rem;
+            }
+            
+            .px-6.py-3 {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .text-4xl {
+                font-size: 2rem;
+            }
+            
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+            
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            /* Improved touch targets */
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .project-card a {
+                display: inline-flex;
+                align-items: center;
+                padding: 0.5rem 1rem;
+            }
+            
+            /* Better mobile navigation */
+            #mobile-menu {
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+            
+            /* Improved form inputs for mobile */
+            input, textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+                min-height: 44px;
+            }
+            
+            textarea {
+                min-height: 120px;
+            }
+            
+            /* Better spacing for touch */
+            .space-y-6 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            .grid.gap-6 {
+                gap: 1rem;
+            }
+            
+            /* Improved card interactions */
+            .project-card {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            
+            .project-card:active {
+                transform: scale(0.98);
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -252,63 +366,65 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center" data-aos="fade-up"
+    <section id="home" class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center" data-aos="fade-up"
      data-aos-duration="3000">
-            <div class="text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></h1>
-                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack & Mobile</h2>
-                <p class="text-lg text-gray-400 mb-8 max-w-lg">Je crée des expériences web et mobiles modernes et interactives avec des technologies de pointe.</p>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a href="#projects" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium transition transform hover:scale-105 shadow-lg">Voir mes projets</a>
-                    <a href="#contact" class="px-6 py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">Me contacter</a>
-                    <a href="https://calendly.com/kimku679/30min" target="_blank" rel="noopener" class="px-6 py-3 border border-purple-500 text-purple-300 hover:bg-purple-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">Réserver un créneau</a>
-                    <a href="docs/kimku_Etouh_CV.pdf" target="_blank" rel="noopener" class="px-6 py-3 border border-slate-600 text-slate-300 hover:bg-slate-800 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105">Télécharger mon CV</a>
+            <div class="text-center lg:text-left order-2 lg:order-1">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></h1>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack & Mobile</h2>
+                <p class="text-base sm:text-lg text-gray-400 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">Je crée des expériences web et mobiles modernes et interactives avec des technologies de pointe.</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                    <a href="#projects" class="px-4 py-2 sm:px-6 sm:py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium transition transform hover:scale-105 shadow-lg text-sm sm:text-base">Voir mes projets</a>
+                    <a href="#contact" class="px-4 py-2 sm:px-6 sm:py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105 text-sm sm:text-base">Me contacter</a>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mt-3 sm:mt-4">
+                    <a href="https://calendly.com/kimku679/30min" target="_blank" rel="noopener" class="px-4 py-2 sm:px-6 sm:py-3 border border-purple-500 text-purple-300 hover:bg-purple-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105 text-sm sm:text-base">Réserver un créneau</a>
+                    <a href="docs/kimku_Etouh_CV.pdf" target="_blank" rel="noopener" class="px-4 py-2 sm:px-6 sm:py-3 border border-slate-600 text-slate-300 hover:bg-slate-800 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105 text-sm sm:text-base">Télécharger mon CV</a>
                 </div>
             </div>
-            <div class="cube-container floating">
+            <div class="cube-container floating order-1 lg:order-2 mb-8 lg:mb-0">
                 <div class="cube" id="cube">
-                    <div class="face front flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-indigo-900 mb-4 flex items-center justify-center">
-                            <i class="fas fa-code text-4xl text-indigo-400"></i>
+                    <div class="face front flex flex-col items-center justify-center p-4 sm:p-6">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-indigo-900 mb-3 sm:mb-4 flex items-center justify-center">
+                            <i class="fas fa-code text-2xl sm:text-4xl text-indigo-400"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Développement Web</h3>
-                        <p class="text-center text-sm text-gray-300 mt-2">Solutions sur mesure pour vos besoins</p>
+                        <h3 class="text-lg sm:text-xl font-bold">Développement Web</h3>
+                        <p class="text-center text-xs sm:text-sm text-gray-300 mt-2">Solutions sur mesure pour vos besoins</p>
                     </div>
-                    <div class="face back flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-purple-900 mb-4 flex items-center justify-center">
-                            <i class="fas fa-mobile-alt text-4xl text-purple-400"></i>
+                    <div class="face back flex flex-col items-center justify-center p-4 sm:p-6">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-purple-900 mb-3 sm:mb-4 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-2xl sm:text-4xl text-purple-400"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Responsive Design</h3>
-                        <p class="text-center text-sm text-gray-300 mt-2">Adapté à tous les appareils</p>
+                        <h3 class="text-lg sm:text-xl font-bold">Responsive Design</h3>
+                        <p class="text-center text-xs sm:text-sm text-gray-300 mt-2">Adapté à tous les appareils</p>
                     </div>
-                    <div class="face right flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-pink-900 mb-4 flex items-center justify-center">
-                            <i class="fas fa-bolt text-4xl text-pink-400"></i>
+                    <div class="face right flex flex-col items-center justify-center p-4 sm:p-6">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-pink-900 mb-3 sm:mb-4 flex items-center justify-center">
+                            <i class="fas fa-bolt text-2xl sm:text-4xl text-pink-400"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Performances</h3>
-                        <p class="text-center text-sm text-gray-300 mt-2">Applications rapides et fluides</p>
+                        <h3 class="text-lg sm:text-xl font-bold">Performances</h3>
+                        <p class="text-center text-xs sm:text-sm text-gray-300 mt-2">Applications rapides et fluides</p>
                     </div>
-                    <div class="face left flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-blue-900 mb-4 flex items-center justify-center">
-                            <i class="fas fa-server text-4xl text-blue-400"></i>
+                    <div class="face left flex flex-col items-center justify-center p-4 sm:p-6">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-blue-900 mb-3 sm:mb-4 flex items-center justify-center">
+                            <i class="fas fa-server text-2xl sm:text-4xl text-blue-400"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Backend Solide</h3>
-                        <p class="text-center text-sm text-gray-300 mt-2">API robustes et sécurisées</p>
+                        <h3 class="text-lg sm:text-xl font-bold">Backend Solide</h3>
+                        <p class="text-center text-xs sm:text-sm text-gray-300 mt-2">API robustes et sécurisées</p>
                     </div>
-                    <div class="face top flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-green-900 mb-4 flex items-center justify-center">
-                            <i class="fas fa-database text-4xl text-green-400"></i>
+                    <div class="face top flex flex-col items-center justify-center p-4 sm:p-6">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-green-900 mb-3 sm:mb-4 flex items-center justify-center">
+                            <i class="fas fa-database text-2xl sm:text-4xl text-green-400"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Bases de Données</h3>
-                        <p class="text-center text-sm text-gray-300 mt-2">Optimisées et évolutives</p>
+                        <h3 class="text-lg sm:text-xl font-bold">Bases de Données</h3>
+                        <p class="text-center text-xs sm:text-sm text-gray-300 mt-2">Optimisées et évolutives</p>
                     </div>
-                    <div class="face bottom flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-yellow-900 mb-4 flex items-center justify-center">
-                            <i class="fas fa-paint-brush text-4xl text-yellow-400"></i>
+                    <div class="face bottom flex flex-col items-center justify-center p-4 sm:p-6">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-yellow-900 mb-3 sm:mb-4 flex items-center justify-center">
+                            <i class="fas fa-paint-brush text-2xl sm:text-4xl text-yellow-400"></i>
                         </div>
-                        <h3 class="text-xl font-bold">UI/UX Design</h3>
-                        <p class="text-center text-sm text-gray-300 mt-2">Expériences utilisateur intuitives</p>
+                        <h3 class="text-lg sm:text-xl font-bold">UI/UX Design</h3>
+                        <p class="text-center text-xs sm:text-sm text-gray-300 mt-2">Expériences utilisateur intuitives</p>
                     </div>
                 </div>
             </div>
@@ -322,7 +438,7 @@
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
             <p class="text-gray-400 mt-4 text-sm">Scores indicatifs mesurés localement. Objectifs: LCP < 2.5s, TBT < 200ms, CLS < 0.1.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-duration="3000">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-duration="3000">
             <div class="bg-slate-900 bg-opacity-50 p-6 rounded-xl text-center">
                 <div class="text-4xl font-bold text-green-400">90+</div>
                 <div class="mt-2 text-gray-300">Performance</div>
@@ -577,7 +693,7 @@
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
             <p class="text-gray-400 mt-4 text-sm">Aperçu de mes contributions GitHub en 2025.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-duration="3000">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8" data-aos="fade-up" data-aos-duration="3000">
             <div class="bg-slate-900 bg-opacity-50 p-4 rounded-xl">
                 <img src="images/github_contributions_overview/kimku003.png" alt="Contributions 2025 de kimku003" class="w-full h-auto rounded-lg object-contain">
                 <div class="mt-3 text-center text-sm text-gray-400">Profil principal: <span class="font-medium text-indigo-300">kimku003</span></div>
@@ -597,7 +713,7 @@
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up"
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up"
      data-aos-duration="3000">
             <!-- Most recent: AI Smartlink -->
             <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
@@ -974,7 +1090,7 @@
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12" data-aos="fade-up"
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12" data-aos="fade-up"
      data-aos-duration="3000">
             <div>
                 <h3 class="text-2xl font-bold mb-6">Travaillons ensemble</h3>
