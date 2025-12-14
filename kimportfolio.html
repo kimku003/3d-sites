@@ -470,7 +470,7 @@
             <div class="relative">
                 <div class="w-full h-80 md:h-96 bg-slate-700 rounded-2xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20"></div>
-                    <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 h-1/2  from-slate-900 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-indigo-500 border-opacity-50 overflow-hidden">
                             <img src="images/me.png" alt="Développeur" class="w-full h-full object-cover">
@@ -715,24 +715,126 @@
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up"
      data-aos-duration="3000">
-            <!-- Most recent: AI Smartlink -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="images/aismartlink/cover.svg" alt="AI Smartlink" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
+                    <img src="images/findpharma/home.png" alt="Findpharma" class="w-full h-full object-cover">
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2">FindPharma</h3>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Findpharma est une application web qui vous permet de rechercher des centres de santés ou pharmacies ouvertes dans une region précise. Tout ce que vous avez à faire est d'entrer le nom d'une ville, un code postal ou le nom d'une commune entière pour filtrer les pharmacies ou centres de santé ouverts dans cette region.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React + Vite</span>
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Typescript</span>
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Supabase</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-auto">
+                        <a href="https://findpharma.onrender.com/" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center whitespace-nowrap">
+                            Voir le projet <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
+                    <img src="images\omnibook\editor1.png" alt="AI Smartlink" class="w-full h-full object-cover">
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2">Digimarket</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Digimarket est un marketplace complet pour la vente, l'achat et la promotion des produits et services digitaux.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React + Vite (Typescript)</span>
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">PostgreSQL</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-auto">
+                        <a href="https://digimarket-v52q.onrender.com" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
+                            Voir le projet <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
+                    <img src="images/wanderlust/home.png" alt="AI Smartlink" class="w-full h-full object-cover">
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2">Wanderlust</h3>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Wanderlust est une plateforme de voyage complète permettant de planifier et de suivre vos voyages.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Gemini 2.5 et 3.0</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-auto">
+                        <a href="https://wanderlust-mtfe.onrender.com/" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
+                            Voir le projet <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
+                    <img src="images/aismartlink/cover.svg" alt="AI Smartlink" class="w-full h-full object-cover">
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">AI Smartlink</h3>
-                    <p class="text-gray-400 text-sm mb-4">Générateur de liens intelligents piloté par IA avec analytique.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Générateur de liens intelligents piloté par IA avec analytique.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Node.js</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">PostgreSQL</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
+                        <a href="https://aismartlink.vercel.app/" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
+                            Voir le projet <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Most recent: AI Smartlink -->
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
+                    <img src="images/aismartlink/cover.svg" alt="AI Smartlink" class="w-full h-full object-cover">
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2">AI Smartlink</h3>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Générateur de liens intelligents piloté par IA avec analytique.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Node.js</span>
+                        <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">PostgreSQL</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="https://aismartlink.vercel.app/" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -743,23 +845,23 @@
                 </div>
             </div>
             <!-- Most recent: Slidecast -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/slidecast/index.png" alt="Slidecast" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Slidecast</h3>
-                    <p class="text-gray-400 text-sm mb-4">Plateforme de partage de présentations avec gestion des sessions et paiements.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Plateforme de partage de présentations avec gestion des sessions et paiements.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Next.js</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Tailwind</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Stripe</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="https://slidecast.vercel.app/" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -770,23 +872,23 @@
                 </div>
             </div>
             <!-- Most recent: Swiftride -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/swiftride/index.png" alt="Swiftride" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-semibold">Frontend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Swiftride</h3>
-                    <p class="text-gray-400 text-sm mb-4">Application de mise en relation pour trajets à la demande. Un clone simplifié de l'expérience de réservation de trajets Uber, permettant aux utilisateurs de demander un trajet simulé et de recevoir des informations fictives sur le conducteur générées par l'API Gemini.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Application de mise en relation pour trajets à la demande. Un clone simplifié de l'expérience de réservation de trajets Uber, permettant aux utilisateurs de demander un trajet simulé et de recevoir des informations fictives sur le conducteur générées par l'API Gemini.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Next.js</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Tailwind</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Supabase</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -797,22 +899,22 @@
                 </div>
             </div>
             <!-- Most recent: AI CV Builder -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/ai_cv_builder/index.png" alt="AI CV Builder" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">AI CV Builder</h3>
-                    <p class="text-gray-400 text-sm mb-4">Un générateur de CV en temps réel. Choisissez parmi plusieurs thèmes professionnels, modifiez vos informations et téléchargez un CV prêt à imprimer en quelques secondes. Conçu pour les chercheurs d'emploi modernes afin de créer facilement des CV remarquables.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Un générateur de CV en temps réel. Choisissez parmi plusieurs thèmes professionnels, modifiez vos informations et téléchargez un CV prêt à imprimer en quelques secondes. Conçu pour les chercheurs d'emploi modernes afin de créer facilement des CV remarquables.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Tailwind</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="https://github.com/joykim003/Cv-builder" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -823,19 +925,19 @@
                 </div>
             </div>
             <!-- Sunlight -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/sunlight/home.png" alt="Sunlight" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Frontend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Sunlight</h3>
-                    <p class="text-gray-400 text-sm mb-4">Plateforme de présentation de l'agence Sunlight de Photographie.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Plateforme de présentation de l'agence Sunlight de Photographie.</p>
                     <div class="flex flex-wrap gap-2 mb-4"></div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="https://sunlight-pro.vercel.app" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -846,19 +948,19 @@
                 </div>
             </div>
             <!-- Benin Data -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/benin_data/overview.png" alt="Bénin Data" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-semibold">Frontend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Bénin Data</h3>
-                    <p class="text-gray-400 text-sm mb-4">Plateforme de visualisations et rapports interactifs. Aperçus des rapports disponibles.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Plateforme de visualisations et rapports interactifs. Aperçus des rapports disponibles.</p>
                     <div class="flex flex-wrap gap-2 mb-4"></div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -869,19 +971,19 @@
                 </div>
             </div>
             <!-- Socialverse -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/socialverse/home.png" alt="Socialverse" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-pink-600 rounded-full text-xs font-semibold">Frontend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Socialverse</h3>
-                    <p class="text-gray-400 text-sm mb-4">Expérimentation de fonctionnalités sociales modernes.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Expérimentation de fonctionnalités sociales modernes.</p>
                     <div class="flex flex-wrap gap-2 mb-4"></div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-pink-400 hover:text-pink-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -892,17 +994,17 @@
                 </div>
             </div>
             <!-- Project 1 -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/Capture7.PNG" alt="Projet 1" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Plateforme E-commerce</h3>
-                    <p class="text-gray-400 text-sm mb-4">Une solution complète de commerce électronique avec paiement sécurisé et gestion des stocks.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Une solution complète de commerce électronique avec paiement sécurisé et gestion des stocks.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Node.js</span>
@@ -912,7 +1014,7 @@
                         <div><span class="font-semibold">Solution:</span> Front React + API Node/Express, panier persistant, Stripe, stock temps réel.</div>
                         <div><span class="font-semibold">Impact:</span> +32% conversion en 6 semaines, TTFB −45%, abandon panier −20%.</div>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -924,17 +1026,17 @@
             </div>
             
             <!-- Project 2 -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Projet 2" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-semibold">Frontend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Application Météo</h3>
-                    <p class="text-gray-400 text-sm mb-4">Application météo en temps réel avec prévisions sur 7 jours et géolocalisation.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Application météo en temps réel avec prévisions sur 7 jours et géolocalisation.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Vue.js</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">API REST</span>
@@ -946,7 +1048,7 @@
                         <div><span class="font-semibold">Solution:</span> Lazy-loading données/graphiques, cache, skeletons, PWA offline.</div>
                         <div><span class="font-semibold">Impact:</span> LCP −55%, erreurs API −30%, rétention J7 +18%.</div>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -958,17 +1060,17 @@
             </div>
             
             <!-- Project 3 -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/Capture2.PNG" alt="Projet 3" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-pink-600 rounded-full text-xs font-semibold">Backend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Saas de Gestion de projets</h3>
-                    <p class="text-gray-400 text-sm mb-4">Plateforme sécurisée pour la gestion de projets.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Plateforme sécurisée pour la gestion de projets.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-pink-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-pink-900 bg-opacity-50 rounded text-xs">Typescript</span>
@@ -979,7 +1081,7 @@
                         <div><span class="font-semibold">Solution:</span> RBAC, vues Kanban/Gantt, notifications temps réel, audit log, quotas.</div>
                         <div><span class="font-semibold">Impact:</span> MTTR −40%, on‑boarding −60%, coûts infra −25%.</div>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-pink-400 hover:text-pink-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -990,24 +1092,24 @@
                 </div>
             </div>
             <!-- Project 5 -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/pt1.png" alt="Projet 2" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-semibold">Frontend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Assistant juridique</h3>
-                    <p class="text-gray-400 text-sm mb-4">Application juridique pour la gestion des documents et des consultations.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Application juridique pour la gestion des documents et des consultations.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Vue.js</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">API REST</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Chart.js</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Geolocation</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -1018,24 +1120,24 @@
                 </div>
             </div>
             <!-- Project 6 -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/pt6.png" alt="Projet 1" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
                         <span class="px-3 py-1 bg-indigo-600 rounded-full text-xs font-semibold">Fullstack</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Tisseur d'histoire</h3>
-                    <p class="text-gray-400 text-sm mb-4">Une solution complète pour ecrire et publier des livres avec format Epub et Pdf.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Une solution complète pour ecrire et publier des livres avec format Epub et Pdf.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">React</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Node.js</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">MongoDB</span>
                         <span class="px-2 py-1 bg-indigo-900 bg-opacity-50 rounded text-xs">Stripe</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -1046,23 +1148,22 @@
                 </div>
             </div>
             <!-- Project 7 -->
-            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <div class="relative h-48 overflow-hidden">
+            <div class="project-card bg-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col h-full">
+                <div class="relative h-48 overflow-hidden flex-shrink-0">
                     <img src="images/Capture6.PNG" alt="Projet 2" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                    <div class="absolute inset-0  from-slate-900 to-transparent"></div>
                     <div class="absolute top-4 right-4">
-                        <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-semibold">Frontend</span>
+                        <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-semibold">Backend</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold mb-2">Api de réseau social</h3>
-                    <p class="text-gray-400 text-sm mb-4">Api de réseau social permettant de partager des publications et d'interagir avec d'autres utilisateurs.</p>
+                    <p class="text-gray-400 text-sm mb-4 flex-grow">Api de réseau social complète permettant de partager des publications et d'interagir avec d'autres utilisateurs.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">Django ninja</span>
-                        <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">API REST</span>
                         <span class="px-2 py-1 bg-purple-900 bg-opacity-50 rounded text-xs">PostgreSQL</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-auto">
                         <a href="#" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center">
                             Voir le projet <i class="fas fa-arrow-right ml-2"></i>
                         </a>
