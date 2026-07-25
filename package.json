@@ -1,0 +1,30 @@
+{
+  "name": "3d-sites",
+  "version": "1.0.0",
+  "description": "",
+  "main": "robot-scene-utils.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "npx tailwindcss -i input.css -o style.css --minify",
+    "dev": "npx tailwindcss -i input.css -o style.css --watch",
+    "test": "node --test tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimku003/3d-sites.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kimku003/3d-sites/issues"
+  },
+  "homepage": "https://github.com/kimku003/3d-sites#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
