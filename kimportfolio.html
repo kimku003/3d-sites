@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
       <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Poppins', sans-serif;
@@ -19,6 +19,34 @@
             color: #f8fafc;
             font-size: 17px;
             line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6, .gradient-text {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .typing-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid;
+            max-width: 0;
+            animation: typeClear 12s linear infinite, blink 0.7s step-end infinite;
+        }
+
+        @keyframes typeClear {
+            0% { max-width: 0; }
+            35% { max-width: 30ch; }
+            65% { max-width: 30ch; }
+            100% { max-width: 0; }
+        }
+
+        .about-typing {
+            animation-delay: 2s, 2s;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
         
         .cube-container {
@@ -370,7 +398,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center" data-aos="fade-up"
      data-aos-duration="3000">
             <div class="text-center lg:text-left order-2 lg:order-1">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></h1>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"><span class="typing-wrapper">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></span></h1>
                 <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack & Mobile</h2>
                 <p class="text-base sm:text-lg text-gray-400 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">Je crée des expériences web et mobiles modernes et interactives avec des technologies de pointe.</p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -461,7 +489,7 @@
     <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-800 bg-opacity-50 rounded-3xl my-16" >
         <div class="text-center mb-16" data-aos="fade-up"
      data-aos-duration="3000">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="gradient-text" >À propos</span> de moi</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4"><span class="typing-wrapper about-typing"><span class="gradient-text">À propos</span> de moi</span></h2>
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
