@@ -6,7 +6,10 @@
     <title>Kimku- Développeur Fullstack</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
       <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
@@ -23,6 +26,70 @@
 
         h1, h2, h3, h4, h5, h6, .gradient-text {
             font-family: 'Fredoka', sans-serif;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+
+        #canvas-container.is-active { opacity: 1; }
+
+        .robot-loading {
+            position: absolute;
+            left: 50%;
+            bottom: 2rem;
+            transform: translateX(-50%);
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.78);
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .robot-loading.is-visible { opacity: 1; }
+
+        #canvas-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .scroll-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px;
+            z-index: 2;
+        }
+
+        .text-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 450px;
+            box-shadow: 0 24px 60px rgba(2, 6, 23, 0.28);
+        }
+
+        @media (min-width: 768px) {
+            .scroll-section { padding-left: max(6vw, 40px); }
+        }
+
+        @media (max-width: 767px) {
+            .scroll-section { align-items: flex-end; padding: 24px; padding-bottom: 10vh; }
+            .text-card { padding: 22px; max-width: 100%; }
         }
 
         .typing-wrapper {
@@ -545,6 +612,83 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- 3D Robots Section - Scrollytelling -->
+    <div id="canvas-container" aria-hidden="true">
+        <div id="robot-loading" class="robot-loading" role="status" aria-live="polite">Chargement du modèle 3D…</div>
+    </div>
+
+    <section id="robots" class="scroll-section" data-step="0" data-model="robot_souriant" data-rotation="0">
+        <div class="text-card">
+            <span class="text-indigo-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Introduction</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Mes <span class="gradient-text">Créations 3D</span></h2>
+            <p class="text-gray-300">Explorez mes modèles robotiques en scrollant. Chaque étape révèle une nouvelle pose et une nouvelle émotion.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-2" class="scroll-section" data-step="1" data-model="robot_like" data-rotation="0.18">
+        <div class="text-card">
+            <span class="text-purple-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Interaction</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Approbation</h2>
+            <p class="text-gray-300">Un pouce levé suffit parfois à transformer une interface en échange chaleureux.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-3" class="scroll-section" data-step="2" data-model="robot_mainlevee" data-rotation="-0.18">
+        <div class="text-card">
+            <span class="text-pink-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Salutation</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">La Main Levée</h2>
+            <p class="text-gray-300">Le robot salue ses utilisateurs et les invite à poursuivre l'exploration.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-4" class="scroll-section" data-step="3" data-model="robot_accroupi" data-rotation="0.12">
+        <div class="text-card">
+            <span class="text-green-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Réflexion</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Prendre du Recul</h2>
+            <p class="text-gray-300">S'accroupir, observer et analyser avant de préparer la prochaine action.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-5" class="scroll-section" data-step="4" data-model="robot_assis" data-rotation="-0.12">
+        <div class="text-card">
+            <span class="text-yellow-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Réflexion</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Une Pause</h2>
+            <p class="text-gray-300">Une posture assise et posée, le temps de réfléchir avant de passer à la prochaine idée.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-6" class="scroll-section" data-step="5" data-model="robot_grimace" data-rotation="0.08">
+        <div class="text-card">
+            <span class="text-red-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Émotion</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">La Grimace</h2>
+            <p class="text-gray-300">Même les robots expriment des émotions. La grimace témoigne de la complexité des interactions humaines.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-7" class="scroll-section" data-step="6" data-model="robot_gauche" data-rotation="0">
+        <div class="text-card">
+            <span class="text-cyan-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Exploration</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">À Gauche</h2>
+            <p class="text-gray-300">Observer sous un autre angle permet souvent de découvrir une solution inattendue.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-8" class="scroll-section" data-step="7" data-model="robot_droite" data-rotation="0">
+        <div class="text-card">
+            <span class="text-blue-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Curiosité</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">À Droite</h2>
+            <p class="text-gray-300">La curiosité guide le regard et nourrit chaque nouvelle expérimentation.</p>
+        </div>
+    </section>
+
+    <section id="robots-step-9" class="scroll-section" data-step="8" data-model="robot_bas" data-rotation="0">
+        <div class="text-card">
+            <span class="text-violet-400 text-sm font-semibold tracking-wider uppercase mb-2 block">Final</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Nouveau Départ</h2>
+            <p class="text-gray-300">Chaque détail compte : regarder, apprendre, puis construire la suite.</p>
         </div>
     </section>
 
@@ -1292,6 +1436,8 @@
             });
         });
     </script>
+    <script src="robot-scene-utils.js"></script>
+    <script src="robot-scene.js"></script>
     <!-- Contributions Lightbox Modal -->
     <div id="img-lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
         <button id="lightbox-close" aria-label="Fermer" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-800/80 border border-slate-600 text-gray-200 hover:bg-slate-700 flex items-center justify-center">
