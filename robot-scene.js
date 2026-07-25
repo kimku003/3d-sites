@@ -2,17 +2,28 @@
     'use strict';
 
     const container = document.getElementById('canvas-container');
-    const sections = [...document.querySelectorAll('.scroll-section[data-model]')];
     const loadingLabel = document.getElementById('robot-loading');
     const dependenciesReady = window.THREE && THREE.GLTFLoader && THREE.DRACOLoader && window.gsap && window.ScrollTrigger && window.RobotSceneUtils;
 
-    if (!container || !sections.length || !dependenciesReady) {
+    if (!container || !dependenciesReady) {
         if (container) container.hidden = true;
         console.warn('La scène 3D ne peut pas démarrer : une dépendance est indisponible.');
         return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
+
+    const models = [
+        { name: 'robot_souriant', rotation: 0 },
+        { name: 'robot_like', rotation: 0.18 },
+        { name: 'robot_mainlevee', rotation: -0.18 },
+        { name: 'robot_accroupi', rotation: 0.12 },
+        { name: 'robot_assis', rotation: -0.12 },
+        { name: 'robot_grimace', rotation: 0.08 },
+        { name: 'robot_gauche', rotation: 0 },
+        { name: 'robot_droite', rotation: 0 },
+        { name: 'robot_bas', rotation: 0 }
+    ];
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
@@ -48,7 +59,6 @@
     let activeMixer = null;
     let activeModelName = '';
     let requestedModel = '';
-    let desiredRotation = 0;
 
     function setLoading(isLoading, message = 'Chargement du modèle 3D…') {
         loadingLabel.textContent = message;
@@ -110,7 +120,6 @@
             if (activeMixer) activeMixer.stopAllAction();
             activeRobot = nextRobot;
             activeModelName = name;
-            desiredRotation = rotation;
 
             const animations = cachedRobot.userData.animations || [];
             activeMixer = animations.length ? new THREE.AnimationMixer(nextRobot.children[0]) : null;
@@ -127,9 +136,9 @@
     }
 
     function preloadFollowingModel(name) {
-        const index = sections.findIndex((section) => section.dataset.model === name);
-        const nextName = sections[index + 1] && sections[index + 1].dataset.model;
-        if (nextName) fetchModel(nextName).catch(() => {});
+        const index = models.findIndex((m) => m.name === name);
+        const next = models[index + 1];
+        if (next) fetchModel(next.name).catch(() => {});
     }
 
     function positionRobot(robot = activeRobot) {
@@ -140,30 +149,24 @@
     }
 
     function initScroll() {
-        sections.forEach((section) => {
-            const card = section.querySelector('.text-card');
-            gsap.fromTo(card, { opacity: 0, y: 50 }, {
-                opacity: 1,
-                y: 0,
-                ease: 'power2.out',
-                scrollTrigger: { trigger: section, start: 'top 82%', end: 'top 38%', scrub: 0.5 }
-            });
-
-            ScrollTrigger.create({
-                trigger: section,
-                start: 'top center',
-                end: 'bottom center',
-                onEnter: () => showModel(section.dataset.model, Number(section.dataset.rotation) || 0),
-                onEnterBack: () => showModel(section.dataset.model, Number(section.dataset.rotation) || 0)
-            });
-        });
+        let lastIdx = -1;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
 
         ScrollTrigger.create({
-            trigger: sections[0],
-            endTrigger: sections[sections.length - 1],
-            start: 'top bottom',
-            end: 'bottom top',
-            onToggle: (self) => container.classList.toggle('is-active', self.isActive)
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            onUpdate: (self) => {
+                const progress = self.progress;
+                const idx = Math.min(Math.floor(progress * models.length), models.length - 1);
+
+                container.classList.toggle('is-active', progress > 0.02 && progress < 0.98);
+
+                if (idx !== lastIdx) {
+                    lastIdx = idx;
+                    showModel(models[idx].name, models[idx].rotation);
+                }
+            }
         });
     }
 
@@ -173,8 +176,10 @@
         const elapsed = clock.elapsedTime;
         if (activeMixer) activeMixer.update(delta);
         if (activeRobot) {
-            activeRobot.rotation.y += (desiredRotation + Math.sin(elapsed * 0.45) * 0.08 - activeRobot.rotation.y) * 0.04;
-            activeRobot.position.y += (Math.sin(elapsed * 1.5) * 0.045 + (window.innerWidth < 768 ? 0.65 : -0.8) - activeRobot.position.y) * 0.1;
+            activeRobot.rotation.y += Math.sin(elapsed * 0.45) * 0.002;
+            const mobile = window.innerWidth < 768;
+            const targetY = mobile ? 0.65 : -0.8;
+            activeRobot.position.y += (Math.sin(elapsed * 1.5) * 0.045 + targetY - activeRobot.position.y) * 0.1;
         }
         renderer.render(scene, camera);
     }
@@ -188,7 +193,7 @@
         ScrollTrigger.refresh();
     });
 
-    showModel(sections[0].dataset.model, Number(sections[0].dataset.rotation) || 0);
+    showModel(models[0].name, models[0].rotation);
     initScroll();
     animate();
 }());

@@ -5,17 +5,17 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 
-test('chaque modèle GLB possède une étape de scrollytelling', () => {
-    const html = fs.readFileSync(path.join(root, 'kimportfolio.html'), 'utf8');
+test('chaque modèle GLB est référencé dans robot-scene.js', () => {
+    const sceneScript = fs.readFileSync(path.join(root, 'robot-scene.js'), 'utf8');
     const modelFiles = fs.readdirSync(path.join(root, 'models'))
         .filter((file) => file.endsWith('.glb'))
         .map((file) => file.replace(/\.glb$/, ''))
         .sort();
-    const integratedModels = [...html.matchAll(/data-model="([^"]+)"/g)]
+    const scriptModels = [...sceneScript.matchAll(/name:\s*'([^']+)'/g)]
         .map((match) => match[1])
         .sort();
 
-    assert.deepEqual(integratedModels, modelFiles);
+    assert.deepEqual(scriptModels, modelFiles);
 });
 
 test('le cadrage normalise la taille et pose le modèle sur le sol', () => {
