@@ -1,0 +1,247 @@
+[
+  {
+    "name": "VivinouAPI",
+    "description": "API Django pour partager des recettes béninoises.",
+    "category": "Fullstack",
+    "tech": ["Django Ninja", "PostgreSQL"],
+    "url": "https://vivinouapi.onrender.com/",
+    "github": null,
+    "image": null,
+    "gradient": { "from": "blue-900", "to": "indigo-900", "icon": "fas fa-plane", "iconColor": "text-blue-300" }
+  },
+  {
+    "name": "DevToolSuite",
+    "description": "Suite d'outils pour développeurs, disponible en PWA.",
+    "category": "Frontend",
+    "tech": ["React", "PWA"],
+    "url": "https://devtool-suite.onrender.com/",
+    "github": null,
+    "image": null,
+    "gradient": { "from": "pink-900", "to": "purple-900", "icon": "fas fa-tools", "iconColor": "text-pink-300" }
+  },
+  {
+    "name": "Mexylux",
+    "description": "E-commerce simulateur & cockpit de course : catalogue, panier, paiement.",
+    "category": "Fullstack",
+    "tech": ["Python"],
+    "url": "https://mexylux.onrender.com/",
+    "github": null,
+    "image": null,
+    "gradient": { "from": "yellow-900", "to": "orange-900", "icon": "fas fa-shopping-cart", "iconColor": "text-yellow-300" }
+  },
+  {
+    "name": "Goodbody",
+    "description": "Gestion de salle de gym : réservations, rendez-vous, génération de reçus PDF.",
+    "category": "Fullstack",
+    "tech": ["Django", "PostgreSQL"],
+    "url": null,
+    "github": null,
+    "image": null,
+    "gradient": { "from": "green-900", "to": "teal-900", "icon": "fas fa-heartbeat", "iconColor": "text-green-300" }
+  },
+  {
+    "name": "Timeprogress",
+    "description": "Application de visualisation de la progression de l'année.",
+    "category": "Frontend",
+    "tech": ["React + Vite", "Framer Motion"],
+    "url": "https://timeprogress-f00i.onrender.com/",
+    "github": null,
+    "image": null,
+    "gradient": { "from": "indigo-900", "to": "purple-900", "icon": "fas fa-clock", "iconColor": "text-indigo-300" }
+  },
+  {
+    "name": "React Filigrane",
+    "description": "Outil d'ajout de filigrane pour la sécurité des documents.",
+    "category": "Frontend",
+    "tech": ["React + Vite"],
+    "url": "https://react-filigrane.onrender.com/",
+    "github": null,
+    "image": null,
+    "gradient": { "from": "purple-900", "to": "pink-900", "icon": "fas fa-stamp", "iconColor": "text-purple-300" }
+  },
+  {
+    "name": "Home Fit",
+    "description": "Application d'entraînement à domicile.",
+    "category": "Frontend",
+    "tech": ["React + Vite"],
+    "url": "https://homefit-i4wx.onrender.com/",
+    "github": null,
+    "image": null,
+    "gradient": { "from": "green-900", "to": "indigo-900", "icon": "fas fa-dumbbell", "iconColor": "text-green-300" }
+  },
+  {
+    "name": "FindPharma",
+    "description": "Findpharma est une application web qui vous permet de rechercher des centres de santé ou pharmacies ouvertes dans une région précise.",
+    "category": "Fullstack",
+    "tech": ["React + Vite", "Typescript", "Supabase"],
+    "url": "https://findpharma.onrender.com/",
+    "github": null,
+    "image": "images/findpharma/home.png",
+    "gradient": null
+  },
+  {
+    "name": "Digimarket",
+    "description": "Digimarket est un marketplace complet pour la vente, l'achat et la promotion des produits et services digitaux.",
+    "category": "Fullstack",
+    "tech": ["React + Vite (Typescript)", "PostgreSQL"],
+    "url": "https://digimarket-v52q.onrender.com",
+    "github": null,
+    "image": "images/omnibook/editor1.png",
+    "gradient": null
+  },
+  {
+    "name": "Wanderlust",
+    "description": "Wanderlust est une plateforme de voyage complète permettant de planifier et de suivre vos voyages.",
+    "category": "Fullstack",
+    "tech": ["React", "Gemini 2.5 et 3.0"],
+    "url": "https://wanderlust-mtfe.onrender.com/",
+    "github": null,
+    "image": "images/wanderlust/home.png",
+    "gradient": null
+  },
+  {
+    "name": "AI Smartlink",
+    "description": "Générateur de liens intelligents piloté par IA avec analytique.",
+    "category": "Fullstack",
+    "tech": ["React", "Node.js", "PostgreSQL"],
+    "url": "https://aismartlink.vercel.app/",
+    "github": null,
+    "image": "images/aismartlink/cover.svg",
+    "gradient": null
+  },
+  {
+    "name": "Slidecast",
+    "description": "Plateforme de partage de présentations avec gestion des sessions et paiements.",
+    "category": "Fullstack",
+    "tech": ["Next.js", "Tailwind", "Stripe"],
+    "url": "https://slidecast.vercel.app/",
+    "github": null,
+    "image": "images/slidecast/index.png",
+    "gradient": null
+  },
+  {
+    "name": "Swiftride",
+    "description": "Application de mise en relation pour trajets à la demande. Un clone simplifié de l'expérience de réservation de trajets Uber.",
+    "category": "Frontend",
+    "tech": ["Next.js", "Tailwind", "Supabase"],
+    "url": null,
+    "github": null,
+    "image": "images/swiftride/index.png",
+    "gradient": null
+  },
+  {
+    "name": "AI CV Builder",
+    "description": "Un générateur de CV en temps réel. Choisissez parmi plusieurs thèmes professionnels et téléchargez un CV prêt à imprimer.",
+    "category": "Fullstack",
+    "tech": ["React", "Tailwind"],
+    "url": "https://github.com/joykim003/Cv-builder",
+    "github": null,
+    "image": "images/ai_cv_builder/index.png",
+    "gradient": null
+  },
+  {
+    "name": "Sunlight",
+    "description": "Plateforme de présentation de l'agence Sunlight de Photographie.",
+    "category": "Frontend",
+    "tech": [],
+    "url": "https://sunlight-pro.vercel.app",
+    "github": null,
+    "image": "images/sunlight/home.png",
+    "gradient": null
+  },
+  {
+    "name": "Bénin Data",
+    "description": "Plateforme de visualisations et rapports interactifs.",
+    "category": "Frontend",
+    "tech": [],
+    "url": null,
+    "github": null,
+    "image": "images/benin_data/overview.png",
+    "gradient": null
+  },
+  {
+    "name": "Socialverse",
+    "description": "Expérimentation de fonctionnalités sociales modernes.",
+    "category": "Frontend",
+    "tech": [],
+    "url": null,
+    "github": null,
+    "image": "images/socialverse/home.png",
+    "gradient": null
+  },
+  {
+    "name": "Plateforme E-commerce",
+    "description": "Une solution complète de commerce électronique avec paiement sécurisé et gestion des stocks.",
+    "category": "Fullstack",
+    "tech": ["React", "Node.js"],
+    "url": null,
+    "github": null,
+    "image": "images/Capture7.PNG",
+    "gradient": null,
+    "details": {
+      "problem": "PME sans canal en ligne fiable, rupture de stock fréquente, conversion faible.",
+      "solution": "Front React + API Node/Express, panier persistant, Stripe, stock temps réel.",
+      "impact": "+32% conversion en 6 semaines, TTFB −45%, abandon panier −20%."
+    }
+  },
+  {
+    "name": "Application Météo",
+    "description": "Application météo en temps réel avec prévisions sur 7 jours et géolocalisation.",
+    "category": "Frontend",
+    "tech": ["Vue.js", "API REST", "Chart.js", "Geolocation"],
+    "url": null,
+    "github": null,
+    "image": "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    "gradient": null,
+    "details": {
+      "problem": "UI peu claire, lente sur mobile bas/moyen de gamme.",
+      "solution": "Lazy-loading données/graphiques, cache, skeletons, PWA offline.",
+      "impact": "LCP −55%, erreurs API −30%, rétention J7 +18%."
+    }
+  },
+  {
+    "name": "SaaS de Gestion de projets",
+    "description": "Plateforme sécurisée pour la gestion de projets.",
+    "category": "Backend",
+    "tech": ["React", "Typescript", "PostgreSQL(Supabase)"],
+    "url": null,
+    "github": null,
+    "image": "images/Capture2.PNG",
+    "gradient": null,
+    "details": {
+      "problem": "Manque de visibilité multi-projets, permissions hétérogènes, coûts élevés.",
+      "solution": "RBAC, vues Kanban/Gantt, notifications temps réel, audit log, quotas.",
+      "impact": "MTTR −40%, on‑boarding −60%, coûts infra −25%."
+    }
+  },
+  {
+    "name": "Assistant juridique",
+    "description": "Application juridique pour la gestion des documents et des consultations.",
+    "category": "Frontend",
+    "tech": ["Vue.js", "API REST", "Chart.js", "Geolocation"],
+    "url": null,
+    "github": null,
+    "image": "images/pt1.png",
+    "gradient": null
+  },
+  {
+    "name": "Tisseur d'histoire",
+    "description": "Une solution complète pour écrire et publier des livres avec format Epub et Pdf.",
+    "category": "Fullstack",
+    "tech": ["React", "Node.js", "MongoDB", "Stripe"],
+    "url": null,
+    "github": null,
+    "image": "images/pt6.png",
+    "gradient": null
+  },
+  {
+    "name": "Api de réseau social",
+    "description": "Api de réseau social complète permettant de partager des publications et d'interagir avec d'autres utilisateurs.",
+    "category": "Backend",
+    "tech": ["Django ninja", "PostgreSQL"],
+    "url": "https://yoursocialapi.onrender.com/",
+    "github": null,
+    "image": "images/Capture6.PNG",
+    "gradient": null
+  }
+]
