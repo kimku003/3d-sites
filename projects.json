@@ -76,7 +76,9 @@
     "tech": ["React + Vite", "Typescript", "Supabase"],
     "url": "https://findpharma.onrender.com/",
     "github": null,
-    "image": "images/findpharma/home.png",
+    "image": "images/findpharma/home.webp",
+    "imgWidth": 1359,
+    "imgHeight": 684,
     "gradient": null
   },
   {
@@ -86,7 +88,9 @@
     "tech": ["React + Vite (Typescript)", "PostgreSQL"],
     "url": "https://digimarket-v52q.onrender.com",
     "github": null,
-    "image": "images/omnibook/editor1.png",
+    "image": "images/omnibook/editor1.webp",
+    "imgWidth": 1339,
+    "imgHeight": 595,
     "gradient": null
   },
   {
@@ -96,7 +100,9 @@
     "tech": ["React", "Gemini 2.5 et 3.0"],
     "url": "https://wanderlust-mtfe.onrender.com/",
     "github": null,
-    "image": "images/wanderlust/home.png",
+    "image": "images/wanderlust/home.webp",
+    "imgWidth": 1344,
+    "imgHeight": 696,
     "gradient": null
   },
   {
@@ -116,7 +122,9 @@
     "tech": ["Next.js", "Tailwind", "Stripe"],
     "url": "https://slidecast.vercel.app/",
     "github": null,
-    "image": "images/slidecast/index.png",
+    "image": "images/slidecast/index.webp",
+    "imgWidth": 1344,
+    "imgHeight": 682,
     "gradient": null
   },
   {
@@ -126,7 +134,9 @@
     "tech": ["Next.js", "Tailwind", "Supabase"],
     "url": null,
     "github": null,
-    "image": "images/swiftride/index.png",
+    "image": "images/swiftride/index.webp",
+    "imgWidth": 924,
+    "imgHeight": 532,
     "gradient": null
   },
   {
@@ -136,7 +146,9 @@
     "tech": ["React", "Tailwind"],
     "url": "https://github.com/joykim003/Cv-builder",
     "github": null,
-    "image": "images/ai_cv_builder/index.png",
+    "image": "images/ai_cv_builder/index.webp",
+    "imgWidth": 1130,
+    "imgHeight": 534,
     "gradient": null
   },
   {
@@ -146,7 +158,9 @@
     "tech": [],
     "url": "https://sunlight-pro.vercel.app",
     "github": null,
-    "image": "images/sunlight/home.png",
+    "image": "images/sunlight/home.webp",
+    "imgWidth": 1352,
+    "imgHeight": 690,
     "gradient": null
   },
   {
@@ -156,7 +170,9 @@
     "tech": [],
     "url": null,
     "github": null,
-    "image": "images/benin_data/overview.png",
+    "image": "images/benin_data/overview.webp",
+    "imgWidth": 1331,
+    "imgHeight": 1150,
     "gradient": null
   },
   {
@@ -166,7 +182,9 @@
     "tech": [],
     "url": null,
     "github": null,
-    "image": "images/socialverse/home.png",
+    "image": "images/socialverse/home.webp",
+    "imgWidth": 802,
+    "imgHeight": 653,
     "gradient": null
   },
   {
@@ -176,7 +194,9 @@
     "tech": ["React", "Node.js"],
     "url": null,
     "github": null,
-    "image": "images/Capture7.PNG",
+    "image": "images/Capture7.webp",
+    "imgWidth": 1342,
+    "imgHeight": 651,
     "gradient": null,
     "details": {
       "problem": "PME sans canal en ligne fiable, rupture de stock fréquente, conversion faible.",
@@ -192,6 +212,8 @@
     "url": null,
     "github": null,
     "image": "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    "imgWidth": 800,
+    "imgHeight": 800,
     "gradient": null,
     "details": {
       "problem": "UI peu claire, lente sur mobile bas/moyen de gamme.",
@@ -206,7 +228,9 @@
     "tech": ["React", "Typescript", "PostgreSQL(Supabase)"],
     "url": null,
     "github": null,
-    "image": "images/Capture2.PNG",
+    "image": "images/Capture2.webp",
+    "imgWidth": 1356,
+    "imgHeight": 694,
     "gradient": null,
     "details": {
       "problem": "Manque de visibilité multi-projets, permissions hétérogènes, coûts élevés.",
@@ -221,7 +245,9 @@
     "tech": ["Vue.js", "API REST", "Chart.js", "Geolocation"],
     "url": null,
     "github": null,
-    "image": "images/pt1.png",
+    "image": "images/pt1.webp",
+    "imgWidth": 1352,
+    "imgHeight": 733,
     "gradient": null
   },
   {
@@ -231,7 +257,9 @@
     "tech": ["React", "Node.js", "MongoDB", "Stripe"],
     "url": null,
     "github": null,
-    "image": "images/pt6.png",
+    "image": "images/pt6.webp",
+    "imgWidth": 1330,
+    "imgHeight": 700,
     "gradient": null
   },
   {
@@ -241,7 +269,9 @@
     "tech": ["Django ninja", "PostgreSQL"],
     "url": "https://yoursocialapi.onrender.com/",
     "github": null,
-    "image": "images/Capture6.PNG",
+    "image": "images/Capture6.webp",
+    "imgWidth": 1348,
+    "imgHeight": 687,
     "gradient": null
   }
 ]

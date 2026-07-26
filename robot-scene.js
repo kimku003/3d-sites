@@ -101,6 +101,12 @@
         return modelCache.get(name);
     }
 
+    function preloadFollowingModel(name) {
+        const index = models.findIndex((m) => m.name === name);
+        const next = models[index + 1];
+        if (next) fetchModel(next.name).catch(() => {});
+    }
+
     async function showModel(name, rotation = 0) {
         if (!name || (name === activeModelName && activeRobot)) return;
         requestedModel = name;
@@ -133,12 +139,6 @@
             return;
         }
         setLoading(false);
-    }
-
-    function preloadFollowingModel(name) {
-        const index = models.findIndex((m) => m.name === name);
-        const next = models[index + 1];
-        if (next) fetchModel(next.name).catch(() => {});
     }
 
     function positionRobot(robot = activeRobot) {
@@ -193,7 +193,6 @@
         ScrollTrigger.refresh();
     });
 
-    showModel(models[0].name, models[0].rotation);
     initScroll();
     animate();
 }());
