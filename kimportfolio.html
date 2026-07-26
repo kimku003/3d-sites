@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kimku- Développeur Fullstack</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/ScrollTrigger.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.11.4/dist/ScrollTrigger.min.js"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -75,18 +76,17 @@
 
         .typing-wrapper {
             display: inline-block;
-            overflow: hidden;
             white-space: nowrap;
             border-right: 3px solid;
-            max-width: 0;
+            clip-path: inset(0 100% 0 0);
             animation: typeClear 12s linear infinite, blink 0.7s step-end infinite;
         }
 
         @keyframes typeClear {
-            0% { max-width: 0; }
-            35% { max-width: 30ch; }
-            65% { max-width: 30ch; }
-            100% { max-width: 0; }
+            0% { clip-path: inset(0 100% 0 0); }
+            35% { clip-path: inset(0 0% 0 0); }
+            65% { clip-path: inset(0 0% 0 0); }
+            100% { clip-path: inset(0 100% 0 0); }
         }
 
         .about-typing {
@@ -1346,8 +1346,8 @@
             });
         });
     </script>
-    <script src="robot-scene-utils.js"></script>
-    <script src="robot-scene.js"></script>
+    <script defer src="robot-scene-utils.js"></script>
+    <script defer src="robot-scene.js"></script>
     <!-- Contributions Lightbox Modal -->
     <div id="img-lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
         <button id="lightbox-close" aria-label="Fermer" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-800/80 border border-slate-600 text-gray-200 hover:bg-slate-700 flex items-center justify-center">
