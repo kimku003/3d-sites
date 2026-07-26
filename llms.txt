@@ -1,0 +1,37 @@
+# Kimku ETOUH - Portfolio
+
+> Développeur fullstack basé au Bénin. Spécialisé en React, Next.js, Node.js, Three.js et développement 3D web.
+
+## Sections
+
+- Accueil: Présentation avec modèle 3D interactif Three.js
+- Performance: Compétences et méthodologies
+- À propos: Parcours et formation
+- Skills: Stack technique (React, Vue.js, Node.js, Express, MongoDB, PostgreSQL, Tailwind CSS, Three.js)
+- Contributions GitHub: Activité open source
+- Projets: 23 projets fullstack, frontend et backend
+- Contact: Formulaire de contact
+
+## Projets principaux
+
+- FindPharma: Plateforme de recherche pharmaceutique
+- Omnibook: Application d'édition collaborative
+- Wanderlust: Application de voyage
+- SwiftRide: Plateforme de covoiturage
+- SlideCast: Outil de présentation
+- AI CV Builder: Générateur de CV par IA
+- SocialVerse: Réseau social
+- BeninData: Tableau de bord de données publiques du Bénin
+- Sunlight: Application éducative
+- AI Smart Link: Outil de gestion de contenu
+
+## Contact
+
+- Email: kimku679@gmail.com
+- GitHub: https://github.com/kimku003
+- LinkedIn: https://www.linkedin.com/in/kim-ku-6164ba2a5/
+- Calendly: https://calendly.com/kimku679/30min
+
+## Tech Stack
+
+React, Next.js, Vue.js, Node.js, Express, MongoDB, PostgreSQL, Tailwind CSS, Three.js, GSAP, Docker
