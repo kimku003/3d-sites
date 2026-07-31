@@ -301,6 +301,8 @@
         body.theme-light .border-slate-700 { border-color: #e2e8f0 !important; }
         body.theme-light a { color: #1e293b; }
         body.theme-light a:hover { color: #111827; }
+        body.theme-light #home a[href="#projects"],
+        body.theme-light button[type="submit"] { color: #ffffff !important; }
         body.theme-light .gradient-text {
             background: linear-gradient(90deg, #4f46e5, #7c3aed, #db2777);
             -webkit-background-clip: text;
@@ -493,10 +495,10 @@
      data-aos-duration="3000">
             <div class="text-center lg:text-left order-2 lg:order-1">
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"><span class="typing-wrapper">Bonjour, je suis <span class="gradient-text">Kim ku ETOUH</span></span></h1>
-                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur Fullstack & Mobile</h2>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Développeur web Fullstack & Mobile</h2>
                 <p class="text-base sm:text-lg text-gray-400 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">Je crée des expériences web et mobiles modernes et interactives avec des technologies de pointe.</p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                    <a href="#projects" class="px-4 py-2 sm:px-6 sm:py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium transition transform hover:scale-105 shadow-lg text-sm sm:text-base">Voir mes projets</a>
+                    <a href="#projects" class="px-4 py-2 sm:px-6 sm:py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium transition transform hover:scale-105 shadow-lg text-sm sm:text-base text-white">Voir mes projets</a>
                     <a href="#contact" class="px-4 py-2 sm:px-6 sm:py-3 border border-indigo-500 text-indigo-400 hover:bg-indigo-900 hover:bg-opacity-30 rounded-lg font-medium transition transform hover:scale-105 text-sm sm:text-base">Me contacter</a>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mt-3 sm:mt-4">
@@ -676,7 +678,7 @@
             <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12" data-aos="fade-up"
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12" data-aos="fade-up"
      data-aos-duration="3000">
             <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl hover:bg-opacity-70 transition">
                 <div class="w-16 h-16 rounded-full bg-indigo-900 flex items-center justify-center mb-6 mx-auto">
@@ -739,6 +741,12 @@
                     <div class="skill-bubble px-4 py-2 bg-purple-900 rounded-full text-sm flex items-center">
                         <i class="fas fa-code-branch text-purple-300 mr-2"></i> GraphQL
                     </div>
+                    <div class="skill-bubble px-4 py-2 bg-purple-900 rounded-full text-sm flex items-center">
+                        <i class="fab fa-elixir text-purple-300 mr-2"></i> Elixir
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-purple-900 rounded-full text-sm flex items-center">
+                        <i class="fas fa-fire text-purple-300 mr-2"></i> Phoenix
+                    </div>
                 </div>
             </div>
             
@@ -767,6 +775,36 @@
                         <i class="fas fa-tasks text-pink-300 mr-2"></i> Firebase Studio
                     </div>
 
+                </div>
+            </div>
+            
+            <div class="bg-slate-800 bg-opacity-50 p-8 rounded-2xl hover:bg-opacity-70 transition">
+                <div class="w-16 h-16 rounded-full bg-green-900 flex items-center justify-center mb-6 mx-auto">
+                    <i class="fas fa-robot text-3xl text-green-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-4">Tests & CI/CD</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fas fa-vial text-green-300 mr-2"></i> Pytest
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fas fa-vial text-green-300 mr-2"></i> Vitest
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fas fa-vial text-green-300 mr-2"></i> Jest
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fas fa-vial text-green-300 mr-2"></i> ExUnit
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fas fa-rocket text-green-300 mr-2"></i> CI/CD
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fab fa-github text-green-300 mr-2"></i> GitHub Actions
+                    </div>
+                    <div class="skill-bubble px-4 py-2 bg-green-900 rounded-full text-sm flex items-center">
+                        <i class="fab fa-docker text-green-300 mr-2"></i> Docker Compose
+                    </div>
                 </div>
             </div>
         </div>
@@ -961,7 +999,7 @@
                         <textarea id="message" name="message" rows="5" required tool-param-description="Contenu du message" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-white placeholder-gray-400"></textarea>
                     </div>
                     <div>
-                        <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition transform hover:scale-105 shadow-lg">
+                        <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg font-medium hover:from-indigo-600 hover:to-purple-600 transition transform hover:scale-105 shadow-lg text-white">
                             Envoyer le message
                         </button>
                     </div>
