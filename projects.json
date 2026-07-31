@@ -4,7 +4,7 @@
     "description": "API Django pour partager des recettes béninoises.",
     "category": "Fullstack",
     "tech": ["Django Ninja", "PostgreSQL"],
-    "url": "https://vivinouapi.onrender.com/",
+    "url": "https://vivinou-api.onrender.com/",
     "github": null,
     "image": null,
     "gradient": { "from": "blue-900", "to": "indigo-900", "icon": "fas fa-plane", "iconColor": "text-blue-300" }
