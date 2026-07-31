@@ -5,9 +5,9 @@
     const loadingLabel = document.getElementById('robot-loading');
     const dependenciesReady = window.THREE && THREE.GLTFLoader && THREE.DRACOLoader && window.gsap && window.ScrollTrigger && window.RobotSceneUtils;
 
-    if (!container || !dependenciesReady) {
+    if (!container || !dependenciesReady || window.innerWidth < 768) {
         if (container) container.hidden = true;
-        console.warn('La scène 3D ne peut pas démarrer : une dépendance est indisponible.');
+        console.warn('La scène 3D ne peut pas démarrer : une dépendance est indisponible ou écran mobile.');
         return;
     }
 

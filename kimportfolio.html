@@ -74,13 +74,19 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.45s ease;
         }
 
         #canvas-container.is-active { opacity: 1; }
+
+        main { position: relative; z-index: 1; }
+
+        @media (max-width: 767px) {
+            #canvas-container { display: none; }
+        }
 
         .robot-loading {
             position: absolute;
@@ -662,13 +668,8 @@
         </div>
     </section>
 
-    <!-- 3D Robot Canvas (fixed background) -->
-    <div id="canvas-container" aria-hidden="true">
-        <div id="robot-loading" class="robot-loading" role="status" aria-live="polite">Chargement du modèle 3D…</div>
-    </div>
-
     <!-- Skills Section -->
-    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" >
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="text-center mb-16" data-aos="fade-up"
      data-aos-duration="3000">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Mes <span class="gradient-text">compétences</span></h2>
@@ -973,6 +974,10 @@
         </div>
     </section>
     </main>
+
+    <div id="canvas-container" aria-hidden="true">
+        <div id="robot-loading" class="robot-loading" role="status" aria-live="polite">Chargement du modèle 3D…</div>
+    </div>
 
     <!-- Footer -->
     <footer class="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900">
