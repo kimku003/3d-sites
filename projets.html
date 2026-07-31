@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tous mes projets - Kimku ETOUH</title>
+    <meta name="description" content="Tous les projets de Kimku ETOUH, développeur fullstack. Projets React, Next.js, Node.js, Three.js et plus.">
+    <link rel="alternate" type="text/plain" href="llms.txt" title="LLM-friendly site summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="style.css?v=219ba9a">
+    <link rel="preload" href="webfonts/all.min.css?v=219ba9a" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="webfonts/all.min.css?v=219ba9a"></noscript>
+    <link rel="preload" href="webfonts/fa-solid-900.woff2?v=219ba9a" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="webfonts/fa-brands-400.woff2?v=219ba9a" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="webfonts/fa-regular-400.woff2?v=219ba9a" as="font" type="font/woff2" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 900;
+            font-display: swap;
+            src: url(webfonts/fa-solid-900.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(webfonts/fa-brands-400.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(webfonts/fa-regular-400.woff2) format('woff2');
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: #0f172a;
+            color: #f8fafc;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6, .gradient-text {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+        h3 { font-size: clamp(1.125rem, 3vw, 1.5rem); }
+        h1, h2, h3 { line-height: 1.2; }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .project-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: all 0.5s;
+        }
+
+        .project-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        body.reduced-motion * {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        /* Proper light theme overrides */
+        body.theme-light {
+            background: #ffffff;
+            color: #0f172a;
+        }
+        body.theme-light .bg-slate-900,
+        body.theme-light .bg-slate-800,
+        body.theme-light .bg-slate-700 {
+            background-color: #ffffff !important;
+        }
+        body.theme-light .bg-opacity-50 { opacity: 1 !important; }
+        body.theme-light .text-gray-400,
+        body.theme-light .text-gray-300,
+        body.theme-light .text-indigo-300 { color: #334155 !important; }
+        body.theme-light .text-indigo-400 { color: #4f46e5 !important; }
+        body.theme-light .text-purple-400 { color: #7c3aed !important; }
+        body.theme-light .hover\:bg-slate-800:hover { background-color: #eef2f7 !important; }
+        body.theme-light nav,
+        body.theme-light footer { background-color: #ffffff !important; }
+        body.theme-light .project-card,
+        body.theme-light .rounded-2xl,
+        body.theme-light .rounded-xl {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        body.theme-light .border-slate-800 { border-color: #e2e8f0 !important; }
+        body.theme-light .border-slate-700 { border-color: #e2e8f0 !important; }
+        body.theme-light a { color: #1e293b; }
+        body.theme-light a:hover { color: #111827; }
+        body.theme-light .gradient-text {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #db2777);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        body.theme-light .skill-bubble {
+            background-color: #f3f4f6 !important;
+            color: #111827 !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        body.theme-light .skill-bubble i { color: #4f46e5 !important; }
+        body.theme-light .bg-indigo-900 { background-color: #eef2ff !important; color: #1e3a8a !important; }
+        body.theme-light .bg-purple-900 { background-color: #f3e8ff !important; color: #5b21b6 !important; }
+        body.theme-light .bg-pink-900 { background-color: #ffe4e6 !important; color: #9d174d !important; }
+        body.theme-light span.bg-opacity-50 { border: 1px solid #e2e8f0; }
+        body.theme-light .project-card span.bg-opacity-50 {
+            background-color: #f3f4f6 !important;
+            color: #111827 !important;
+            border: 1px solid #e5e7eb !important;
+        }
+        body.theme-light .project-card .absolute.top-4.right-4 span {
+            background-color: #e5e7eb !important;
+            color: #111827 !important;
+            border: 1px solid #d1d5db !important;
+        }
+
+        /* Mobile-specific improvements */
+        @media (max-width: 640px) {
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .project-card {
+                margin-bottom: 1rem;
+            }
+
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .project-card a {
+                display: inline-flex;
+                align-items: center;
+                padding: 0.5rem 1rem;
+            }
+
+            .grid.gap-6 {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-opacity-90 bg-slate-900 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="kimportfolio.html" class="text-2xl font-bold gradient-text">Kimku ETOUH</a>
+                <div class="flex items-center space-x-4">
+                    <a href="kimportfolio.html" class="px-3 py-2 rounded-md text-sm font-medium text-indigo-300 hover:text-white hover:bg-slate-800 transition">
+                        <i class="fas fa-arrow-left mr-1"></i> Accueil
+                    </a>
+                    <button id="toggle-theme" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-slate-800 transition border border-slate-700">
+                        <i class="fas fa-adjust mr-1"></i> Thème
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- All Projects Section -->
+        <section id="projects" class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Tous mes <span class="gradient-text">projets</span></h1>
+                <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
+                <p class="text-gray-400 mt-4 text-sm">L'ensemble de mes réalisations, personnelles et professionnelles.</p>
+            </div>
+
+            <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">Portfolio3D</span>
+                    <p class="text-gray-400 mt-2">Développeur Fullstack - Créateur d'expériences web</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/kimku003" class="text-gray-400 hover:text-white transition" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/kim-ku-6164ba2a5/" class="text-gray-400 hover:text-white transition" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://calendly.com/kimku679/30min" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition" title="Réserver un créneau">
+                        <i class="fa-regular fa-calendar"></i>
+                    </a>
+                    <a href="docs/kimku_Etouh_CV.pdf" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition" title="Télécharger mon CV">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Kim ku ETOUH. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition">Mentions légales</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition">Politique de confidentialité</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 text-sm transition">Conditions d'utilisation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-indigo-600 hover:bg-indigo-700 flex items-center justify-center shadow-lg transition opacity-0 invisible">
+        <i class="fas fa-arrow-up text-white"></i>
+    </button>
+
+    <script defer src="projects-render.js?v=219ba9a"></script>
+    <script>
+        // Render all projects
+        document.addEventListener('DOMContentLoaded', async () => {
+            var grid = document.getElementById('projects-grid');
+            if (grid) {
+                await renderProjects(grid);
+            }
+
+            // Theme toggle with persistence
+            const themeBtn = document.getElementById('toggle-theme');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('theme-light');
+            }
+
+            const updateToggleLabels = () => {
+                if (themeBtn) {
+                    const isLight = document.body.classList.contains('theme-light');
+                    themeBtn.innerHTML = `<i class="fas fa-adjust mr-1"></i> Thème: ${isLight ? 'Clair' : 'Sombre'}`;
+                }
+            };
+
+            updateToggleLabels();
+
+            if (themeBtn) {
+                themeBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('theme-light');
+                    const isLight = document.body.classList.contains('theme-light');
+                    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                    updateToggleLabels();
+                });
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
